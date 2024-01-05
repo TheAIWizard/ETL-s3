@@ -1,1 +1,1 @@
-python utils/transform_to_json.py
+python transform_to_json.py
