@@ -32,7 +32,7 @@ def transform_to_json(input_file_path):
         table = pa.parquet.read_table(input_file_path)
         data_list = table.to_pandas().to_dict(orient='records')
     else:
-        raise ValueError(f"Unsupported input format: {input_extension}")
+        print(f"Unsupported input format: {input_extension}")
 
     return data_list
 
