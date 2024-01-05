@@ -38,8 +38,8 @@ def transform_to_json(input_file_path):
 
 
 def main(bucket: str, path: str, input_file_path: str):
-    data_list = transform_to_json(input_file_path)
-    save_to_s3(data_list, bucket, path + '.json')
+    data = transform_to_json(input_file_path)
+    save_to_s3(data, bucket, path + '.json')
 
 
 if __name__ == "__main__":
