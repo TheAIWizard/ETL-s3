@@ -44,5 +44,4 @@ def main(bucket: str, path: str, input_file_path: str):
 
 if __name__ == "__main__":
     input_file_path = str(sys.argv[1])
-
     main(os.getenv("S3_BUCKET"), os.getenv("S3_BUCKET_PREFIX"), input_file_path)
