@@ -6,15 +6,17 @@ import pyarrow as pa
 import s3fs
 
 
-def save_to_s3(data, bucket: str, prefix: str, path: str):
+def save_to_s3(data, bucket: str, path: str):
     fs = s3fs.S3FileSystem(
         client_kwargs={"endpoint_url": os.getenv("S3_ENDPOINT_URL")},
         key=os.getenv("AWS_ACCESS_KEY_ID"),
         secret=os.getenv("AWS_SECRET_ACCESS_KEY"),
     )
-    with fs.open(f'{bucket}/{prefix}/{path}', 'wb') as f:
+    with fs.open(f'{bucket}/{path}', 'wb') as f:
         # Save the data as JSON
         json.dump(data, f, indent=2)
+
+# next: create functions to split json and save it in annotation source in dated folders.
 
 
 def transform_to_json(input_file_path):
@@ -35,13 +37,12 @@ def transform_to_json(input_file_path):
     return data_list
 
 
-def main(bucket: str, prefix: str, input_file_path: str):
+def main(bucket: str, path: str, input_file_path: str):
     data_list = transform_to_json(input_file_path)
-    save_to_s3(data_list, bucket, prefix + input_file_path + '.json')
+    save_to_s3(data_list, bucket, path + '.json')
 
 
 if __name__ == "__main__":
     input_file_path = str(sys.argv[1])
 
-    data_list = transform_to_json(input_file_path)
     main(os.getenv("S3_BUCKET"), os.getenv("S3_BUCKET_PREFIX"), input_file_path)
