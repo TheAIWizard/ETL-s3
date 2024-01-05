@@ -14,10 +14,10 @@ spec:
           - "-c"
           - |
             cd /tmp &&
-
             wget https://raw.githubusercontent.com/TheAIWizard/ETL-s3/main/utils/transform_to_json.py &&
-            chmod +x transform_to_json.py &&
-            ./transform_to_json.py --input-file /tmp/ETL-s3/data_gu_check_API.csv --output-file /tmp/ETL-s3/data_gu_check_API.json
+            wget https://raw.githubusercontent.com/TheAIWizard/ETL-s3/main/utils/transform_to_json.sh &&
+            chmod +x transform_to_json.sh &&
+            ./transform_to_json.sh
         volumeMounts:
         - name: tmp
           mountPath: "/tmp"
@@ -27,12 +27,12 @@ spec:
         - name: AWS_ACCESS_KEY_ID
           valueFrom:
             secretKeyRef:
-              name: my-s3-creds
+              name: s3-creds-service-account
               key: accessKey
         - name: AWS_SECRET_ACCESS_KEY
           valueFrom:
             secretKeyRef:
-              name: my-s3-creds
+              name: s3-creds-service-account
               key: secretKey
         - name: AWS_DEFAULT_REGION
           value: us-east-1
@@ -41,7 +41,6 @@ spec:
         - name: S3_BUCKET_PREFIX
           value: Label Studio/Annotation APE 2024/Extract manuelle   # Replace with your S3 bucket prefix name
       restartPolicy: Never
-      serviceAccountName: get-logs-api
       volumes:
       - name: tmp
         emptyDir: {}
