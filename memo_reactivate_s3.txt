@@ -1,0 +1,2 @@
+mc --json config host add minio https://minio.lab.sspcloud.fr $(kubectl get secret s3-creds-service-account -o jsonpath='{.data.accessKey}' | base6
+4 --decode) $(kubectl get secret s3-creds-service-account -o jsonpath='{.data.secretKey}' | base64 --decode) --api S3v4
