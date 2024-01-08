@@ -17,6 +17,7 @@ spec:
             wget https://raw.githubusercontent.com/TheAIWizard/ETL-s3/main/utils/transform_to_json.py &&
             wget https://raw.githubusercontent.com/TheAIWizard/ETL-s3/main/utils/transform_to_json.sh &&
             chmod +x transform_to_json.sh &&
+            export MC_HOST_s3=https://$AWS_ACCESS_KEY_ID:$AWS_SECRET_ACCESS_KEY@$S3_ENDPOINT_URL &&
             ./transform_to_json.sh
         volumeMounts:
         - name: tmp
