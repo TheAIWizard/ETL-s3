@@ -4,6 +4,7 @@ import csv
 import json
 import pyarrow as pa
 import s3fs
+import datetime
 
 
 def save_to_s3(data, bucket: str, path: str):
@@ -17,6 +18,25 @@ def save_to_s3(data, bucket: str, path: str):
         json.dump(data, f, indent=2)
 
 # next: create functions to split json and save it in annotation source in dated folders.
+
+
+def split_and_save_to_s3(input_file_path, bucket: str, path: str):
+    # Extract the directory path from the input JSON file
+    directory_path = os.path.dirname(input_file_path)
+
+    # Create a folder named with the current date of upload
+    current_date = datetime.now().strftime('%Y-%m-%d')
+    output_folder = f'{current_date}_split_{os.path.splitext(os.path.basename(input_file_path))[0]}'
+    os.makedirs(os.path.join(directory_path, output_folder), exist_ok=True)
+
+    with open(input_file_path) as inp:
+        tasks = json.load(inp)
+
+    # Split tasks and save each to S3
+    for i, v in enumerate(tasks):
+        output_file_name = f'task_{i}.json'
+        output_path = os.path.join(output_folder, output_file_name)
+        save_to_s3(v, bucket, os.path.join(path, output_path))
 
 
 def transform_to_json(input_file_path):
@@ -37,12 +57,14 @@ def transform_to_json(input_file_path):
     return data_list
 
 
-def main(bucket: str, path: str, input_file_path: str):
+def main(bucket: str, path_json: str, path_source: str, input_file_path: str):
     data = transform_to_json(input_file_path)
-    print(path + input_file_path + '.json')
-    save_to_s3(data, bucket, path + input_file_path + '.json')
+    # save converted json to bucket
+    save_to_s3(data, bucket, path_json + input_file_path + '.json')
+    # split and save json to data source bucket for label studio annotation
+    split_and_save_to_s3(input_file_path, bucket, path_source)
 
 
 if __name__ == "__main__":
     input_file_path = str(sys.argv[1])
-    main(os.getenv("S3_BUCKET"), os.getenv("S3_BUCKET_PREFIX"), input_file_path)
+    main(os.getenv("S3_BUCKET"), os.getenv("S3_BUCKET_PREFIX_TRANSFORM_JSON"), os.getenv("S3_BUCKET_PREFIX_ANNOTATION_SOURCE"), input_file_path)

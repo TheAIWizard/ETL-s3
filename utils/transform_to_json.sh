@@ -6,8 +6,6 @@ mc ls "$SOURCE_PATH" | grep -E '\.csv$|\.parquet$' | awk '{print $6}' | while re
     echo "Moving file: $filename"
     # Retrieves fiactivity description from s3
     mc cp --recursive "$SOURCE_PATH$filename" ./
-    pwd
-    ls
     # Transform and save batch data to annotate
     python transform_to_json.py $filename
     # Move the treated batch data to archive
