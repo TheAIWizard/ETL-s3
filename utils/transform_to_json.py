@@ -12,7 +12,7 @@ def save_to_s3(data, bucket: str, path: str):
         key=os.getenv("AWS_ACCESS_KEY_ID"),
         secret=os.getenv("AWS_SECRET_ACCESS_KEY"),
     )
-    with fs.open(f'{bucket}/{path}', 'wb') as f:
+    with fs.open(f'{bucket}/{path}', 'w') as f:
         # Save the data as JSON
         json.dump(data, f, indent=2)
 
@@ -39,7 +39,8 @@ def transform_to_json(input_file_path):
 
 def main(bucket: str, path: str, input_file_path: str):
     data = transform_to_json(input_file_path)
-    save_to_s3(data, bucket, path + '.json')
+    print(data)
+    save_to_s3(data, bucket, path + input_file_path + '.json')
 
 
 if __name__ == "__main__":
