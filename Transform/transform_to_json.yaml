@@ -14,7 +14,7 @@ spec:
           - "-c"
           - |
             cd /tmp &&
-            
+            wget https://raw.githubusercontent.com/TheAIWizard/ETL-s3/main/utils/transform_to_json.py &&
             wget https://raw.githubusercontent.com/TheAIWizard/ETL-s3/main/utils/transform_to_json.sh &&
             chmod +x transform_to_json.sh &&
             export MC_HOST_s3=https://$AWS_ACCESS_KEY_ID:$AWS_SECRET_ACCESS_KEY@$AWS_S3_ENDPOINT &&
@@ -42,7 +42,7 @@ spec:
         - name: S3_BUCKET
           value: nrandriamanana  # Replace with your S3 bucket name
         - name: S3_BUCKET_PREFIX
-          value: "Label Studio/Annotation APE 2024/Batch data json"   # Replace with your S3 bucket prefix name
+          value: "Label Studio/Annotation APE 2024/Batch data json/"   # Replace with your S3 bucket prefix name
       restartPolicy: Never
       volumes:
       - name: tmp
