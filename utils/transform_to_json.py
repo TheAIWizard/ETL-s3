@@ -4,7 +4,7 @@ import csv
 import json
 import pyarrow as pa
 import s3fs
-import datetime
+from datetime import datetime
 
 
 def save_to_s3(data, bucket: str, path: str):
