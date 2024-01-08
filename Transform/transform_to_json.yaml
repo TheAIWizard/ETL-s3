@@ -17,14 +17,16 @@ spec:
             wget https://raw.githubusercontent.com/TheAIWizard/ETL-s3/main/utils/transform_to_json.py &&
             wget https://raw.githubusercontent.com/TheAIWizard/ETL-s3/main/utils/transform_to_json.sh &&
             chmod +x transform_to_json.sh &&
-            export MC_HOST_s3=https://$AWS_ACCESS_KEY_ID:$AWS_SECRET_ACCESS_KEY@$S3_ENDPOINT_URL &&
+            export MC_HOST_s3=https://$AWS_ACCESS_KEY_ID:$AWS_SECRET_ACCESS_KEY@$AWS_S3_ENDPOINT &&
             ./transform_to_json.sh
         volumeMounts:
         - name: tmp
           mountPath: "/tmp"
         env:
         - name: S3_ENDPOINT_URL
-          value: "https://minio.lab.sspcloud.fr"  # Replace with your Minio endpoint URL
+          value: https://minio.lab.sspcloud.fr  # Replace with your Minio endpoint URL
+        - name: AWS_S3_ENDPOINT
+          value: minio.lab.sspcloud.fr  # Replace with your Minio endpoint URL
         - name: AWS_ACCESS_KEY_ID
           valueFrom:
             secretKeyRef:
