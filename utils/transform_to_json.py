@@ -59,7 +59,7 @@ def transform_to_json(input_file_path):
 def main(bucket: str, path_json: str, path_source: str, input_file_path: str):
     data = transform_to_json(input_file_path)
     # save converted json to bucket
-    save_to_s3(data, bucket, path_json + os.path.splitext(input_file_path)[0] + '.json')
+    save_to_s3(data, bucket, path_json, os.path.splitext(input_file_path)[0] + '.json')
     # split and save json to data source bucket for label studio annotation
     split_and_save_to_s3(data, bucket, path_source, os.path.splitext(input_file_path)[0])
 
