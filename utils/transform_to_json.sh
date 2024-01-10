@@ -4,7 +4,7 @@ SOURCE_PATH="s3/nrandriamanana/Label Studio/Annotation APE 2024/Extract manuelle
 ARCHIVE_PATH="s3/nrandriamanana/Label Studio/Annotation APE 2024/Extract manuelle/Archive annotations/"
 
 # Retrieve activity description to annotate and archive them
-mc ls "$SOURCE_PATH" | while read -r filename; do
+mc ls "$SOURCE_PATH" | grep -E '\.csv$|\.parquet$' | awk '{print $6}' | while read -r filename; do
     case "$filename" in
         *.csv | *.parquet)
             echo "Moving file: $filename"
