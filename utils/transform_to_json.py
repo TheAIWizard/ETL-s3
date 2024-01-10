@@ -35,6 +35,7 @@ def split_and_save_to_s3(json_data, bucket: str, path: str, file_path: str):
     for i, v in enumerate(tasks):
         output_file_name = f'task_{i}.json'
         output_path = os.path.join(output_folder, output_file_name)
+        print(str(os.path.join(path, output_path)))
         save_to_s3(v, bucket, os.path.join(path, output_path))
 
 
