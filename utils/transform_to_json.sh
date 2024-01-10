@@ -6,9 +6,9 @@ mc ls "$SOURCE_PATH" | grep -E '\.csv$|\.parquet$' | awk '{print $6}' | while re
     [ ! -z "$filename" ] && echo "Moving file: $filename" || echo "No files to annotate"
     echo "$SOURCE_PATH$filename"
     # Retrieves activity description from s3
-    [ -n "$filename" ] && mc cp --recursive "$SOURCE_PATH$filename" ./
+    #[ -n "$filename" ] && mc cp --recursive "$SOURCE_PATH$filename" ./
     # Transform and save batch data to annotate
-    python transform_to_json.py "$filename"
+    python transform_to_json.py $filename
     # Move the treated batch data to archive
-    [ -n "$filename" ] && mc mv "$SOURCE_PATH$filename" "$ARCHIVE_PATH"
+    #[ -n "$filename" ] && mc mv "$SOURCE_PATH$filename" "$ARCHIVE_PATH"
 done
