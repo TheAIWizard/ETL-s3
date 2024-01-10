@@ -5,14 +5,22 @@ ARCHIVE_PATH="s3/nrandriamanana/Label Studio/Annotation APE 2024/Extract manuell
 
 # Retrieve activity description to annotate and archive them
 mc ls "$SOURCE_PATH" | grep -E '\.csv$|\.parquet$' | awk '{print $6}' | while read -r filename; do
-    export filename=$filename
-    echo $filename
-    [[ "$filename" == *.csv || "$filename" == *.parquet ]] && echo "Moving file: $filename" || echo "$filename is not a file to annotate"
-    echo "$SOURCE_PATH$filename"
-    # Retrieves activity description from s3
-    [[ "$filename" == *.csv || "$filename" == *.parquet ]] && mc cp --recursive "$SOURCE_PATH$filename" ./
-    # Transform and save batch data to annotate
-    python transform_to_json.py $filename
-    # Move the treated batch data to archive
-    [[ "$filename" == *.csv || "$filename" == *.parquet ]] && mc mv "$SOURCE_PATH$filename" "$ARCHIVE_PATH"
+    case "$filename" in
+        *.csv | *.parquet)
+            echo "Moving file: $filename"
+            echo "$SOURCE_PATH$filename"
+            
+            # Retrieves activity description from s3
+            mc cp --recursive "$SOURCE_PATH$filename" ./
+            
+            # Transform and save batch data to annotate
+            python transform_to_json.py "$filename"
+            
+            # Move the treated batch data to archive
+            mc mv "$SOURCE_PATH$filename" "$ARCHIVE_PATH"
+            ;;
+        *)
+            echo "$filename is not a file to annotate"
+            ;;
+    esac
 done
