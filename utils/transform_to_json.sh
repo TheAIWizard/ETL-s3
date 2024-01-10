@@ -3,6 +3,7 @@ ARCHIVE_PATH="s3/nrandriamanana/Label Studio/Annotation APE 2024/Extract manuell
 
 # Retrieve activity description to annotate and archive them
 mc ls "$SOURCE_PATH" | grep -E '\.csv$|\.parquet$' | awk '{print $6}' | while read -r filename; do
+    export filename=$filename
     [[ "$filename" == *.csv || "$filename" == *.parquet ]] && echo "Moving file: $filename" || echo "No files to annotate"
     echo "$SOURCE_PATH$filename"
     # Retrieves activity description from s3
