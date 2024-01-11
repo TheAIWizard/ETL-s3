@@ -42,7 +42,7 @@ def transform_to_json(input_file_path):
             data_list = [row for row in csv_reader]
     elif input_extension.lower() == '.parquet':
         # Read Parquet file and convert to list of dictionaries
-        table = pq.parquet.read_table(input_file_path)
+        table = pq.read_table(input_file_path)
         data_list = table.to_pandas().to_dict(orient='records')
     else:
         print(f"Unsupported input format: {input_extension}")
