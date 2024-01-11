@@ -24,13 +24,13 @@ def split_and_save_to_s3(list_of_dicts, bucket: str, path: str, file_path: str):
     # Extract the directory path from the input JSON data
     current_date = datetime.now().strftime('%Y-%m-%d_%H-%M-%S')
     output_folder = f'{current_date}_split_{file_path}'
-    
+
     # Create a folder named with the current date of upload
     os.makedirs(output_folder, exist_ok=True)
-    
+
     # Split tasks and save each to S3
     for i, dictionary in enumerate(list_of_dicts):
-        output_file_name = f'dictionary_{i}.json'
+        output_file_name = f'task_{i}.json'
         output_path = os.path.join(output_folder, output_file_name)
         print(str(os.path.join(path, output_path)))
         save_to_s3(dictionary, bucket, os.path.join(path, output_path))
