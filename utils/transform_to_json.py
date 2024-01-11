@@ -20,20 +20,16 @@ def save_to_s3(data, bucket: str, path: str, file_path: str):
 # next: create functions to split json and save it in annotation source in dated folders.
 
 
-def split_and_save_to_s3(list_of_dicts, bucket: str, path: str, file_path: str):
-    # Extract the directory path from the input JSON data
+def split_and_save_to_s3(list_of_dicts, bucket: str, base_path: str, file_path: str):
     current_date = datetime.now().strftime('%Y-%m-%d_%H-%M-%S')
-    output_folder = f'{current_date}_split_{file_path}'
-
-    # Create a folder named with the current date of upload
-    os.makedirs(output_folder, exist_ok=True)
 
     # Split tasks and save each to S3
     for i, dictionary in enumerate(list_of_dicts):
         output_file_name = f'task_{i}.json'
-        output_path = os.path.join(output_folder, output_file_name)
-        print(str(os.path.join(path, output_path)))
-        save_to_s3(dictionary, bucket, os.path.join(path, output_path))
+        object_key = f'{base_path}{current_date}-{file_path}/'
+
+        print(f"S3 Object Key: {object_key}")
+        save_to_s3(dictionary, bucket, object_key, output_file_name)
 
 
 def transform_to_json(input_file_path):
