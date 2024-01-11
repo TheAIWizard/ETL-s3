@@ -43,7 +43,11 @@ def transform_to_json(input_file_path):
     elif input_extension.lower() == '.parquet':
         # Read Parquet file and convert to list of dictionaries
         table = pq.read_table(input_file_path)
-        data_list = table.to_pandas().to_dict(orient='records')
+        data_df = table.to_pandas()
+        # Convert Timestamp objects to strings
+        data_df['date_modification'] = data_df['date_modification'].astype(str)
+        # Convert DataFrame to a list of dictionaries
+        data_list = data_df.to_dict(orient='records')
     else:
         print(f"Unsupported input format: {input_extension}")
 
