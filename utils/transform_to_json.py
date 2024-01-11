@@ -13,7 +13,7 @@ def save_to_s3(data, bucket: str, path: str, file_path: str):
         key=os.getenv("AWS_ACCESS_KEY_ID"),
         secret=os.getenv("AWS_SECRET_ACCESS_KEY"),
     )
-    with fs.open(f'{bucket}/{path}/{file_path}', 'w') as f:
+    with fs.open(f'{bucket}/{path}{file_path}', 'w') as f:
         # Save the data as JSON
         json.dump(data, f, indent=2)
 
