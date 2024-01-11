@@ -25,7 +25,7 @@ def split_and_save_to_s3(list_of_dicts, bucket: str, base_path: str, file_path: 
 
     # Split tasks and save each to S3
     for i, dictionary in enumerate(list_of_dicts):
-        output_file_name = f'task_{i}.json'
+        output_file_name = f'task_{i+1}.json'
         object_key = f'{base_path}{current_date}-{file_path}/'
 
         print(f"S3 Object Key: {object_key}{output_file_name}")
