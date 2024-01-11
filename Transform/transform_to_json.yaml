@@ -40,7 +40,7 @@ spec:
               name: s3-creds-service-account
               key: secretKey
         - name: LABEL_STUDIO_SERVICE_ENDPOINT
-          value: http://user-nrandriamanana-933743.user.lab.sspcloud.fr
+          value: http://user-nrandriamanana-928004.user.lab.sspcloud.fr
         - name: LABEL_STUDIO_TOKEN
           valueFrom:
             secretKeyRef:

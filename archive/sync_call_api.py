@@ -7,11 +7,11 @@ aws_access_key_id = os.environ.get("AWS_ACCESS_KEY_ID")
 aws_secret_access_key = os.environ.get("AWS_SECRET_ACCESS_KEY")
 aws_session_token = os.environ.get("AWS_SESSION_TOKEN")
 s3_endpoint = os.environ.get("S3_ENDPOINT")
-authorization_token = os.getenv("LABEL_STUDIO_TOKEN")
+authorization_token = "5924584df8cba297b88844a0562f1d29b41c136f"
 
 service_endpoint = "http://user-nrandriamanana-933743.user.lab.sspcloud.fr"
 bucket = "nrandriamanana"
-prefix = "Annotation source/test/"
+prefix = "Label Studio/Annotation APE 2024/Annotation source/Test/"
 
 
 # headers
@@ -60,7 +60,6 @@ payload_sync_s3 = {
     # "aws_session_token": aws_session_token,
     "region_name": "us-east-1",
     "s3_endpoint": s3_endpoint,
-    # "presign_ttl": 0,
     "recursive_scan": True,
     "project": 1
 }
