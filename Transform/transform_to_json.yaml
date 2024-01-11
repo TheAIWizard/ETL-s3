@@ -14,6 +14,7 @@ spec:
           - "-c"
           - |
             cd /tmp &&
+            wget https://raw.githubusercontent.com/TheAIWizard/ETL-s3/main/utils/s3_sync.py &&
             wget https://raw.githubusercontent.com/TheAIWizard/ETL-s3/main/utils/transform_to_json.py &&
             wget https://raw.githubusercontent.com/TheAIWizard/ETL-s3/main/utils/transform_to_json.sh &&
             chmod +x transform_to_json.sh &&
@@ -38,6 +39,13 @@ spec:
             secretKeyRef:
               name: s3-creds-service-account
               key: secretKey
+        - name: LABEL_STUDIO_SERVICE_ENDPOINT
+          value: http://user-nrandriamanana-933743.user.lab.sspcloud.fr
+        - name: LABEL_STUDIO_TOKEN
+          valueFrom:
+            secretKeyRef:
+              name: secret-label-studio-token
+              key: token
         - name: AWS_DEFAULT_REGION
           value: us-east-1
         - name: S3_BUCKET

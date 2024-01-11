@@ -7,10 +7,12 @@ aws_access_key_id = os.environ.get("AWS_ACCESS_KEY_ID")
 aws_secret_access_key = os.environ.get("AWS_SECRET_ACCESS_KEY")
 aws_session_token = os.environ.get("AWS_SESSION_TOKEN")
 s3_endpoint = os.environ.get("S3_ENDPOINT")
+authorization_token = os.getenv("LABEL_STUDIO_TOKEN")
 
+service_endpoint = "http://user-nrandriamanana-933743.user.lab.sspcloud.fr"
 bucket = "nrandriamanana"
 prefix = "Annotation source/test/"
-authorization_token = "your token"
+
 
 # headers
 headers = {
@@ -20,7 +22,7 @@ headers = {
 
 
 # Create new s3 storage for annotation source
-url_create_s3 = "http://user-nrandriamanana-933743.user.lab.sspcloud.fr/api/storages/s3"
+url_create_s3 = f"{service_endpoint}/api/storages/s3"
 payload_create_s3 = {
     "presign": True,
     "title": "Your Title test source",
@@ -31,7 +33,7 @@ payload_create_s3 = {
     "use_blob_urls": False,
     "aws_access_key_id": aws_access_key_id,
     "aws_secret_access_key": aws_secret_access_key,
-    "aws_session_token": aws_session_token,
+    # "aws_session_token": aws_session_token,
     "region_name": "us-east-1",
     "s3_endpoint": s3_endpoint,
     # "presign_ttl": 0,
@@ -41,7 +43,8 @@ payload_create_s3 = {
 
 
 # Replace with the actual values for {id} and other parameters
-url_sync_s3 = "http://user-nrandriamanana-933743.user.lab.sspcloud.fr/api/storages/s3/{id}/sync"
+url_sync_s3 = service_endpoint + "/api/storages/s3/{id}/sync"
+print(url_sync_s3)
 
 payload_sync_s3 = {
     "presign": True,
@@ -54,7 +57,7 @@ payload_sync_s3 = {
     "use_blob_urls": False,
     "aws_access_key_id": aws_access_key_id,
     "aws_secret_access_key": aws_secret_access_key,
-    "aws_session_token": aws_session_token,
+    # "aws_session_token": aws_session_token,
     "region_name": "us-east-1",
     "s3_endpoint": s3_endpoint,
     # "presign_ttl": 0,

@@ -5,6 +5,26 @@ import json
 import pyarrow.parquet as pq
 import s3fs
 from datetime import datetime
+from s3_sync import sync_api_s3
+
+
+def sync_storage_s3(prefix: str):
+    sync_api_s3(prefix)
+
+
+def split_and_save_to_s3(list_of_dicts, bucket: str, base_path: str, file_path: str):
+    # split json and save it in annotation source in dated folders.
+    current_date = datetime.now().strftime('%Y-%m-%d_%H-%M-%S')
+
+    # Split tasks and save each to S3
+    for i, dictionary in enumerate(list_of_dicts):
+        output_file_name = f'task_{i+1}.json'
+        object_key = f'{base_path}{current_date}-{file_path}/'
+
+        print(f"S3 Object Key: {object_key}{output_file_name}")
+        save_to_s3(dictionary, bucket, object_key, output_file_name)
+    # Once tasks loaded, sync s3 storage on label studio
+    sync_storage_s3(object_key)
 
 
 def save_to_s3(data, bucket: str, path: str, file_path: str):
@@ -16,20 +36,6 @@ def save_to_s3(data, bucket: str, path: str, file_path: str):
     with fs.open(f'{bucket}/{path}{file_path}', 'w') as f:
         # Save the data as JSON
         json.dump(data, f, indent=2)
-
-# next: create functions to split json and save it in annotation source in dated folders.
-
-
-def split_and_save_to_s3(list_of_dicts, bucket: str, base_path: str, file_path: str):
-    current_date = datetime.now().strftime('%Y-%m-%d_%H-%M-%S')
-
-    # Split tasks and save each to S3
-    for i, dictionary in enumerate(list_of_dicts):
-        output_file_name = f'task_{i+1}.json'
-        object_key = f'{base_path}{current_date}-{file_path}/'
-
-        print(f"S3 Object Key: {object_key}{output_file_name}")
-        save_to_s3(dictionary, bucket, object_key, output_file_name)
 
 
 def transform_to_json(input_file_path):
