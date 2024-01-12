@@ -19,7 +19,7 @@ def sync_api_s3(prefix):
     }
 
     # Create new s3 storage for annotation source
-    url_create_s3 = f"{service_endpoint}/api/storages/s3"
+    url_create_s3 = f"{service_endpoint}/api/storages/export/s3"
     payload_create_s3 = {
         "presign": True,
         "title": "Your Title test source",
@@ -27,6 +27,7 @@ def sync_api_s3(prefix):
         "last_sync_count": 0,
         "bucket": bucket,
         "prefix": prefix,
+        "can_delete_objects": True,
         "use_blob_urls": False,
         "aws_access_key_id": aws_access_key_id,
         "aws_secret_access_key": aws_secret_access_key,
@@ -34,7 +35,6 @@ def sync_api_s3(prefix):
         "region_name": "us-east-1",
         "s3_endpoint": s3_endpoint,
         # "presign_ttl": 0,
-        "recursive_scan": True,
         "project": 1
     }
 
