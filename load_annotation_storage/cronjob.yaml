@@ -3,10 +3,11 @@ kind: CronJob
 metadata:
   name: send-batch-api
 spec:
-  schedule: "*/5 * * * *" # tous les 5 minutes, si on veut faire toutes les minutes : "* * * * *"
+  schedule: "*/2 * * * *" # toutes les 2 minutes, si on veut faire toutes les minutes : "* * * * *"
   concurrencyPolicy: Forbid # ensure only one pod is running at a time
   jobTemplate:
     spec:
+      backoffLimit: 1  # Number of retries before considering the Job as failed
       template:
         spec:
           containers:
