@@ -38,10 +38,7 @@ def sync_api_s3(prefix):
         "project": 1
     }
 
-    # Replace with the actual values for {id} and other parameters
-    url_sync_s3 = service_endpoint + "/api/storages/s3/{id}/sync"
-    print(url_sync_s3)
-
+    # Sync s3 storage for annotation source
     payload_sync_s3 = {
         "presign": True,
         "title": "Your Title test",
@@ -63,11 +60,12 @@ def sync_api_s3(prefix):
 
     # Perform the POST request to create S3 storage connection
     response_create_s3 = requests.post(url_create_s3, data=json.dumps(payload_create_s3), headers=headers)
-    print(response_create_s3.json()["id"])
-    print(str(response_create_s3.json()["id"]))
     id_s3 = str(response_create_s3.json()["id"])  # s3 storage connection id
+    print("id: " + id_s3)
+    # Replace with the actual values for {id} and other parameters
+    url_sync_s3 = service_endpoint + "/api/storages/s3/" + id_s3 + "/sync"
     # Perform the POST request to sync S3 storage connection
-    response_sync_s3 = requests.post(url_sync_s3.format(id=id_s3), data=json.dumps(payload_sync_s3), headers=headers)
+    response_sync_s3 = requests.post(url_sync_s3, data=json.dumps(payload_sync_s3), headers=headers)
 
     # Check the responses
     if response_create_s3.status_code == 200:

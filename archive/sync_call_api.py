@@ -9,9 +9,9 @@ aws_session_token = os.environ.get("AWS_SESSION_TOKEN")
 s3_endpoint = os.environ.get("S3_ENDPOINT")
 authorization_token = "your token"
 
-service_endpoint = "http://user-nrandriamanana-933743.user.lab.sspcloud.fr"
+service_endpoint = "http://user-nrandriamanana-928004.user.lab.sspcloud.fr"
 bucket = "nrandriamanana"
-prefix = "Label Studio/Annotation APE 2024/Annotation source/Test/"
+prefix = "Label Studio/Annotation APE 2024/Annotation source/2024-01-12_09-03-33-extrait_base_sirene_ape_2023/"
 
 
 # headers
@@ -43,8 +43,6 @@ payload_create_s3 = {
 
 
 # Replace with the actual values for {id} and other parameters
-url_sync_s3 = service_endpoint + "/api/storages/s3/{id}/sync"
-print(url_sync_s3)
 
 payload_sync_s3 = {
     "presign": True,
@@ -66,10 +64,10 @@ payload_sync_s3 = {
 
 # Perform the POST request to create S3 storage connection
 response_create_s3 = requests.post(url_create_s3, data=json.dumps(payload_create_s3), headers=headers)
-print(response_create_s3.json()["id"])
-print(str(response_create_s3.json()["id"]))
 id_s3 = str(response_create_s3.json()["id"])  # s3 storage connection id
+print("id: " + id_s3)
 # Perform the POST request to sync S3 storage connection
+url_sync_s3 = service_endpoint + "/api/storages/s3/" + id_s3 + "/sync"
 response_sync_s3 = requests.post(url_sync_s3.format(id=id_s3), data=json.dumps(payload_sync_s3), headers=headers)
 
 # Check the responses
