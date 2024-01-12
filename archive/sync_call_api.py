@@ -7,7 +7,7 @@ aws_access_key_id = os.environ.get("AWS_ACCESS_KEY_ID")
 aws_secret_access_key = os.environ.get("AWS_SECRET_ACCESS_KEY")
 aws_session_token = os.environ.get("AWS_SESSION_TOKEN")
 s3_endpoint = os.environ.get("S3_ENDPOINT")
-authorization_token = "5924584df8cba297b88844a0562f1d29b41c136f"
+authorization_token = "your token"
 
 service_endpoint = "http://user-nrandriamanana-933743.user.lab.sspcloud.fr"
 bucket = "nrandriamanana"

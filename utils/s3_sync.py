@@ -39,7 +39,7 @@ def sync_api_s3(prefix):
     }
 
     # Replace with the actual values for {id} and other parameters
-    url_sync_s3 = f"{service_endpoint}/api/storages/s3/{id}/sync"
+    url_sync_s3 = service_endpoint + "/api/storages/s3/{id}/sync"
     print(url_sync_s3)
 
     payload_sync_s3 = {
