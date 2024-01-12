@@ -4,6 +4,7 @@ import csv
 import json
 import pyarrow.parquet as pq
 import s3fs
+import pytz
 from datetime import datetime
 from s3_sync import sync_api_s3
 
@@ -13,8 +14,10 @@ def sync_storage_s3(prefix: str):
 
 
 def split_and_save_to_s3(list_of_dicts, bucket: str, base_path: str, file_path: str):
+    # Définir le fuseau horaire local actuel
+    local_timezone = pytz.timezone('Europe/Paris')
     # split json and save it in annotation source in dated folders.
-    current_date = datetime.now().strftime('%Y-%m-%d_%H-%M-%S')
+    current_date = datetime.now(local_timezone).strftime('%Y-%m-%d_%H-%M-%S')
 
     # Split tasks and save each to S3
     for i, dictionary in enumerate(list_of_dicts):
