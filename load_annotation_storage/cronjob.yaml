@@ -1,0 +1,65 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: send-batch-api
+spec:
+  schedule: "*/5 * * * *" # tous les 5 minutes, si on veut faire toutes les minutes : "* * * * *"
+  concurrencyPolicy: Forbid # ensure only one pod is running at a time
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: send-batch-label-studio
+            image: inseefrlab/onyxia-python-datascience:py3.10.9
+            imagePullPolicy: IfNotPresent
+            command:
+              - "/bin/sh"
+              - "-c"
+              - |
+                cd /tmp &&
+                wget https://raw.githubusercontent.com/TheAIWizard/ETL-s3/main/utils/s3_sync.py &&
+                wget https://raw.githubusercontent.com/TheAIWizard/ETL-s3/main/utils/transform_to_json.py &&
+                wget https://raw.githubusercontent.com/TheAIWizard/ETL-s3/main/utils/transform_to_json.sh &&
+                chmod +x transform_to_json.sh &&
+                export MC_HOST_s3=https://$AWS_ACCESS_KEY_ID:$AWS_SECRET_ACCESS_KEY@$AWS_S3_ENDPOINT &&
+                ./transform_to_json.sh 
+                echo "ok" &&
+            volumeMounts:
+            - name: tmp
+              mountPath: "/tmp"
+            env:
+            - name: S3_ENDPOINT_URL
+              value: https://minio.lab.sspcloud.fr  # Replace with your Minio endpoint URL
+            - name: AWS_S3_ENDPOINT
+              value: minio.lab.sspcloud.fr  # Replace with your Minio endpoint URL
+            - name: AWS_ACCESS_KEY_ID
+              valueFrom:
+                secretKeyRef:
+                  name: s3-creds-service-account
+                  key: accessKey
+            - name: AWS_SECRET_ACCESS_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: s3-creds-service-account
+                  key: secretKey
+            - name: LABEL_STUDIO_SERVICE_ENDPOINT
+              value: http://user-nrandriamanana-491888.user.lab.sspcloud.fr # replace with your service endpoint
+            - name: LABEL_STUDIO_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: secret-label-studio-token
+                  key: token
+            - name: AWS_DEFAULT_REGION
+              value: us-east-1
+            - name: S3_BUCKET
+              value: nrandriamanana  # Replace with your S3 bucket name
+            - name: S3_BUCKET_PREFIX_TRANSFORM_JSON
+              value: "Label Studio/Annotation APE 2024/Batch data json/"   # Replace with your S3 bucket prefix name
+            - name: S3_BUCKET_PREFIX_ANNOTATION_SOURCE
+              value: "Label Studio/Annotation APE 2024/Annotation source/"   # Replace with your S3 bucket prefix name
+          restartPolicy: Never
+          serviceAccountName: send-batch-label-studio
+          volumes:
+          - name: tmp
+            emptyDir: {}
