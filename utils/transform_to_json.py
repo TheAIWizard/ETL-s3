@@ -6,7 +6,7 @@ import pyarrow.parquet as pq
 import s3fs
 import pytz
 from datetime import datetime
-from s3_sync import sync_api_s3
+from s3_sync_source import sync_api_s3
 
 
 def sync_storage_s3(prefix: str):
