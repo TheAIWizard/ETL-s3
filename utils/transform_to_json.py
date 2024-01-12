@@ -52,6 +52,8 @@ def transform_to_json(input_file_path):
         data_df = table.to_pandas()
         # Convert Timestamp objects to strings
         data_df['date_modification'] = data_df['date_modification'].astype(str)
+        # Replace NaN values with empty strings
+        data_df = data_df.fillna("")
         # Convert DataFrame to a list of dictionaries
         data_list = data_df.to_dict(orient='records')
     else:
