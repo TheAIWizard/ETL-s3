@@ -19,7 +19,7 @@ spec:
               - "-c"
               - |
                 cd /tmp &&
-                wget https://raw.githubusercontent.com/TheAIWizard/ETL-s3/main/utils/s3_sync.py &&
+                wget https://raw.githubusercontent.com/TheAIWizard/ETL-s3/main/utils/s3_sync_source.py &&
                 wget https://raw.githubusercontent.com/TheAIWizard/ETL-s3/main/utils/transform_to_json.py &&
                 wget https://raw.githubusercontent.com/TheAIWizard/ETL-s3/main/utils/transform_to_json.sh &&
                 chmod +x transform_to_json.sh &&
@@ -45,7 +45,7 @@ spec:
                   name: s3-creds-service-account
                   key: secretKey
             - name: LABEL_STUDIO_SERVICE_ENDPOINT
-              value: http://user-nrandriamanana-491888.user.lab.sspcloud.fr # replace with your service endpoint
+              value: http://user-nrandriamanana-115611.user.lab.sspcloud.fr # replace with your service endpoint
             - name: LABEL_STUDIO_TOKEN
               valueFrom:
                 secretKeyRef:

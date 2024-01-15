@@ -39,11 +39,9 @@ def sync_api_s3(prefix):
     }
 
     # Sync s3 storage for annotation source
-    payload_sync_s3 = {
-        "presign": True,
+    payload_create_sync_s3 = {
         "title": "Your Title test",
         "description": "Your Description test",
-        "last_sync_count": 0,
         "can_delete_objects": True,
         "bucket": bucket,
         "prefix": prefix,
@@ -53,8 +51,6 @@ def sync_api_s3(prefix):
         # "aws_session_token": aws_session_token,
         "region_name": "us-east-1",
         "s3_endpoint": s3_endpoint,
-        # "presign_ttl": 0,
-        "recursive_scan": True,
         "project": 1
     }
 
