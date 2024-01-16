@@ -52,9 +52,9 @@ spec:
         - name: S3_BUCKET
           value: nrandriamanana  # Replace with your S3 bucket name
         - name: S3_BUCKET_PREFIX_TRANSFORM_JSON
-          value: "Label Studio/Annotation APE 2024/Batch data json/"   # Replace with your S3 bucket prefix name
+          value: "Label Studio/Annotation APE 2024/NAF 2008/Batch data json/"   # Replace with your S3 bucket prefix name
         - name: S3_BUCKET_PREFIX_ANNOTATION_SOURCE
-          value: "Label Studio/Annotation APE 2024/Annotation source/"   # Replace with your S3 bucket prefix name
+          value: "Label Studio/Annotation APE 2024/NAF 2008/Annotation source/"   # Replace with your S3 bucket prefix name where to load the split
       restartPolicy: Never
       volumes:
       - name: tmp

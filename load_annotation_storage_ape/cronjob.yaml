@@ -37,12 +37,12 @@ spec:
             - name: AWS_ACCESS_KEY_ID
               valueFrom:
                 secretKeyRef:
-                  name: s3-creds-service-account
+                  name: my-s3-creds
                   key: accessKey
             - name: AWS_SECRET_ACCESS_KEY
               valueFrom:
                 secretKeyRef:
-                  name: s3-creds-service-account
+                  name: my-s3-creds
                   key: secretKey
             - name: LABEL_STUDIO_SERVICE_ENDPOINT
               value: http://user-nrandriamanana-115611.user.lab.sspcloud.fr # replace with your service endpoint
@@ -54,15 +54,15 @@ spec:
             - name: AWS_DEFAULT_REGION
               value: us-east-1
             - name: S3_BUCKET
-              value: nrandriamanana  # Replace with your S3 bucket name
+              value: projet-ape # Replace with your S3 bucket name
             - name: S3_BUCKET_PREFIX_TRANSFORM_JSON
-              value: "Label Studio/Annotation APE 2024/Batch data json/"   # Replace with your S3 bucket prefix name
+              value: "Label Studio/Annotation APE 2024/NAF 2008/Batch data json/"   # Replace with your S3 bucket prefix name
             - name: S3_BUCKET_PREFIX_ANNOTATION_SOURCE
-              value: "Label Studio/Annotation APE 2024/Annotation source/"   # Replace with your S3 bucket prefix name
+              value: "Label Studio/Annotation APE 2024/NAF 2008/Annotation source/"   # Replace with your S3 bucket prefix name
             - name: S3_BUCKET_PREFIX_DEPOT_MANUEL
-              value: "Label Studio/Annotation APE 2024/Extract manuelle/"   # Replace with your S3 bucket prefix name
+              value: "Label Studio/Annotation APE 2024/NAF 2008/Extract manuelle/"   # Replace with your S3 bucket prefix name
             - name: S3_BUCKET_PREFIX_ARCHIVE_DEPOT_MANUEL
-              value: "Label Studio/Annotation APE 2024/Extract manuelle/Archive annotations/"   # Replace with your S3 bucket prefix name
+              value: "Label Studio/Annotation APE 2024/NAF 2008/Extract manuelle/Archive annotations/"   # Replace with your S3 bucket prefix name
           restartPolicy: Never
           serviceAccountName: send-batch-label-studio
           volumes:

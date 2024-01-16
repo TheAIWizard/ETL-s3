@@ -31,12 +31,17 @@ def split_and_save_to_s3(list_of_dicts, bucket: str, base_path: str, file_path: 
 
 
 def save_to_s3(data, bucket: str, path: str, file_path: str):
+    # Définir le fuseau horaire local actuel
+    local_timezone = pytz.timezone('Europe/Paris')
+    # save it in batch data json in dated folders.
+    current_date = datetime.now(local_timezone).strftime('%Y-%m-%d_%H-%M-%S')
+
     fs = s3fs.S3FileSystem(
         client_kwargs={"endpoint_url": os.getenv("S3_ENDPOINT_URL")},
         key=os.getenv("AWS_ACCESS_KEY_ID"),
         secret=os.getenv("AWS_SECRET_ACCESS_KEY"),
     )
-    with fs.open(f'{bucket}/{path}{file_path}', 'w') as f:
+    with fs.open(f'{bucket}/{path}{current_date}-{file_path}', 'w') as f:
         # Save the data as JSON
         json.dump(data, f, indent=2)
 
