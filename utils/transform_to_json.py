@@ -55,6 +55,7 @@ def format_data(data_df):
     data_df['activ_nat_et_intitule'] = data_df['activ_nat_et'].map(correspondance_tableau)
     # Replace NaN values with empty strings
     data_df = data_df.fillna("")
+    print(data_df)
     return data_df
 
 
