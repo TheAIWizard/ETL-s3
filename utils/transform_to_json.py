@@ -41,6 +41,20 @@ def save_to_s3(data, bucket: str, path: str, file_path: str):
         json.dump(data, f, indent=2)
 
 
+def format_data(data_df):
+    with open('correspondance_intitule_nature_activite.json', 'r') as file:
+        correspondance_tableau = json.load(file)
+    # Convert Timestamp objects to strings
+    data_df['date_modification'] = data_df['date_modification'].astype(str)
+    # Replace NaN values with empty strings
+    data_df = data_df.fillna("")
+    # Map activ_nat_et with its heading
+    data_df['activ_nat_et_intitule'] = data_df['activ_nat_et'].map(correspondance_tableau)
+    # Replace NaN values with empty strings
+    data_df = data_df.fillna("")
+    return data_df
+
+
 def transform_to_json(input_file_path):
     _, input_extension = os.path.splitext(input_file_path)
 
@@ -53,10 +67,8 @@ def transform_to_json(input_file_path):
         # Read Parquet file and convert to list of dictionaries
         table = pq.read_table(input_file_path)
         data_df = table.to_pandas()
-        # Convert Timestamp objects to strings
-        data_df['date_modification'] = data_df['date_modification'].astype(str)
-        # Replace NaN values with empty strings
-        data_df = data_df.fillna("")
+        # Format dataframe
+        format_data(data_df)
         # Convert DataFrame to a list of dictionaries
         data_list = data_df.to_dict(orient='records')
     else:
