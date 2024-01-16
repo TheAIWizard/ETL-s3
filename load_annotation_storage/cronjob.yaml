@@ -1,7 +1,7 @@
 apiVersion: batch/v1
 kind: CronJob
 metadata:
-  name: send-batch-api
+  name: send-batch-label-studio
 spec:
   schedule: "*/2 * * * *" # toutes les 2 minutes, si on veut faire toutes les minutes : "* * * * *"
   concurrencyPolicy: Forbid # ensure only one pod is running at a time
@@ -19,6 +19,7 @@ spec:
               - "-c"
               - |
                 cd /tmp &&
+                wget https://raw.githubusercontent.com/TheAIWizard/ETL-s3/main/template/correspondance_intitule_nature_activite.json &&
                 wget https://raw.githubusercontent.com/TheAIWizard/ETL-s3/main/utils/s3_sync_source.py &&
                 wget https://raw.githubusercontent.com/TheAIWizard/ETL-s3/main/utils/transform_to_json.py &&
                 wget https://raw.githubusercontent.com/TheAIWizard/ETL-s3/main/utils/transform_to_json.sh &&

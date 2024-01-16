@@ -1,8 +1,8 @@
 #!/bin/bash
 set -x
 
-SOURCE_PATH=$S3_BUCKET_PREFIX_DEPOT_MANUEL
-ARCHIVE_PATH=$S3_BUCKET_PREFIX_ARCHIVE_DEPOT_MANUEL
+SOURCE_PATH="s3/$S3_BUCKET/$S3_BUCKET_PREFIX_DEPOT_MANUEL"
+ARCHIVE_PATH="s3/$S3_BUCKET/$S3_BUCKET_PREFIX_ARCHIVE_DEPOT_MANUEL"
 
 # Retrieve activity description to annotate and archive them
 # 2>/dev/null suppress any error messages like syntax that may occur
