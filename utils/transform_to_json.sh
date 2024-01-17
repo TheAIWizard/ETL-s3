@@ -19,6 +19,8 @@ if [ -n "$files" ]; then
                 
                 # Transform and save batch data to annotate
                 python transform_to_json.py "$filename"
+
+                # Create target S3
                 
                 # Move the treated batch data to the archive
                 mc mv "$SOURCE_PATH$filename" "$ARCHIVE_PATH"
@@ -30,4 +32,5 @@ if [ -n "$files" ]; then
     done
 else
     echo "No files found for processing."
+# Sync target S3
 fi

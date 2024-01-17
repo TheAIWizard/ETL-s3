@@ -46,7 +46,9 @@ spec:
                   name: my-s3-creds
                   key: secretKey
             - name: LABEL_STUDIO_SERVICE_ENDPOINT
-              value: http://projet-ape-942068.user.lab.sspcloud.fr # replace with your service endpoint
+              value: http://projet-ape-102830.user.lab.sspcloud.fr # replace with your service endpoint
+            - name: LABEL_STUDIO_PROJECT_ID
+              value: "1" # replace with your project id
             - name: LABEL_STUDIO_TOKEN
               valueFrom:
                 secretKeyRef:
