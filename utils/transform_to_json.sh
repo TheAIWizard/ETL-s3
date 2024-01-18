@@ -3,6 +3,7 @@ set -x
 
 SOURCE_PATH="s3/$S3_BUCKET/$S3_BUCKET_PREFIX_DEPOT_MANUEL"
 ARCHIVE_PATH="s3/$S3_BUCKET/$S3_BUCKET_PREFIX_ARCHIVE_DEPOT_MANUEL"
+TARGET_PATH="s3/$S3_BUCKET/$S3_BUCKET_PREFIX_ANNOTATION_TARGET"
 
 # Retrieve activity description to annotate and archive them
 # 2>/dev/null suppress any error messages like syntax that may occur
@@ -21,6 +22,7 @@ if [ -n "$files" ]; then
                 python transform_to_json.py "$filename"
 
                 # Create target S3
+                python s3_create_target.py "$TARGET_PATH"
                 
                 # Move the treated batch data to the archive
                 mc mv "$SOURCE_PATH$filename" "$ARCHIVE_PATH"
@@ -32,5 +34,7 @@ if [ -n "$files" ]; then
     done
 else
     echo "No files found for processing."
-# Sync target S3
 fi
+
+# Sync target S3
+python s3_sync_target.py "$TARGET_PATH"

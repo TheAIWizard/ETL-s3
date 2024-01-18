@@ -1,3 +1,4 @@
+import sys
 import os
 import json
 import requests
@@ -42,8 +43,8 @@ def create_connection_api_s3(prefix):
     # Perform the POST request to create S3 storage connection
     response_create_s3 = requests.post(url_create_s3, data=json.dumps(payload_create_s3), headers=headers)
     id_s3 = str(response_create_s3.json()["id"])  # s3 storage connection id
-    print("id: " + id_s3)
-     
+    os.environ["ID_S3_TARGET"] = id_s3
+
     # Check the responses
     if response_create_s3.status_code == 200:
         print("Create export storage successful!")
@@ -51,3 +52,6 @@ def create_connection_api_s3(prefix):
     else:
         print(f"Error: {response_create_s3.status_code} - {response_create_s3.text}")
 
+
+s3_target_path = str(sys.argv[1])
+create_connection_api_s3(s3_target_path)

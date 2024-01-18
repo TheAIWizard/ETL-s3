@@ -66,6 +66,8 @@ spec:
               value: "Label Studio/Annotation APE 2024/NAF 2008/Extract manuelle/"   # Replace with your S3 bucket prefix name
             - name: S3_BUCKET_PREFIX_ARCHIVE_DEPOT_MANUEL
               value: "Label Studio/Annotation APE 2024/NAF 2008/Extract manuelle/Archive annotations/"   # Replace with your S3 bucket prefix name
+            - name: S3_BUCKET_PREFIX_ANNOTATION_TARGET
+              value: "Label Studio/Annotation APE 2024/NAF 2008/Annotation target/" 
           restartPolicy: Never
           serviceAccountName: send-batch-label-studio
           volumes:
