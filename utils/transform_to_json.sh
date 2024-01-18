@@ -40,4 +40,4 @@ fi
 export ID_S3_TARGET=$(python s3_create_target.py "$TARGET_PATH")
 # Sync target S3
 echo "$ID_S3_TARGET"
-python s3_sync_target.py "$ID_S3_TARGET" "$TARGET_PATH"_TARGET
+python s3_sync_target.py "$ID_S3_TARGET" "$TARGET_PATH"
