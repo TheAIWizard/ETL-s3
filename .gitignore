@@ -1,7 +1,7 @@
 *.parquet
 *.csv
 *.json
-*!s3_create_target.py
+*archive/s3_create_target.py
 
 !correspondance_intitule_nature_activite.json
 
