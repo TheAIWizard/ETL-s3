@@ -9,7 +9,8 @@ def sync_api_s3(prefix):
     aws_secret_access_key = os.environ.get("AWS_SECRET_ACCESS_KEY")
     # aws_session_token = os.environ.get("AWS_SESSION_TOKEN")
     bucket = os.getenv("S3_BUCKET")
-    s3_endpoint = os.environ.get("S3_ENDPOINT") # change to S3_ENDPOINT_URL if different python image
+    # change to S3_ENDPOINT_URL if different python image
+    s3_endpoint = os.environ.get("S3_ENDPOINT")
     service_endpoint = os.getenv("LABEL_STUDIO_SERVICE_ENDPOINT")
     project = os.getenv("LABEL_STUDIO_PROJECT_ID")
     authorization_token = os.getenv("LABEL_STUDIO_TOKEN")

@@ -10,7 +10,8 @@ def create_connection_api_s3(prefix):
     aws_secret_access_key = os.environ.get("AWS_SECRET_ACCESS_KEY")
     # aws_session_token = os.environ.get("AWS_SESSION_TOKEN")
     bucket = os.getenv("S3_BUCKET")
-    s3_endpoint = os.environ.get("S3_ENDPOINT_URL")
+    # change to S3_ENDPOINT_URL if different python image
+    s3_endpoint = os.environ.get("S3_ENDPOINT")
     service_endpoint = os.getenv("LABEL_STUDIO_SERVICE_ENDPOINT")
     project = os.getenv("LABEL_STUDIO_PROJECT_ID")
     authorization_token = os.getenv("LABEL_STUDIO_TOKEN")
@@ -43,7 +44,6 @@ def create_connection_api_s3(prefix):
     # Perform the POST request to create S3 storage connection
     response_create_s3 = requests.post(url_create_s3, data=json.dumps(payload_create_s3), headers=headers)
     id_s3 = str(response_create_s3.json()["id"])  # s3 storage connection id
-    os.environ["ID_S3_TARGET"] = id_s3
 
     # Check the responses
     if response_create_s3.status_code == 200:
@@ -51,6 +51,8 @@ def create_connection_api_s3(prefix):
         print(response_create_s3.json())
     else:
         print(f"Error: {response_create_s3.status_code} - {response_create_s3.text}")
+
+    return id_s3
 
 
 s3_target_path = str(sys.argv[1])
