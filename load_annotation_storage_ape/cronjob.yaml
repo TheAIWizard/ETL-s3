@@ -3,7 +3,7 @@ kind: CronJob
 metadata:
   name: send-batch-label-studio
 spec:
-  schedule: "*/2 * * * *" # toutes les 2 minutes, si on veut faire toutes les minutes : "* * * * *"
+  schedule: "* * * * *" # toutes les minutes, si on veut faire toutes les 2 minutes : "*/2 * * * *"
   concurrencyPolicy: Forbid # ensure only one pod is running at a time
   jobTemplate:
     spec:
