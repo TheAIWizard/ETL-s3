@@ -4,7 +4,7 @@ import json
 import requests
 
 
-def sync_api_s3(id_s3,prefix):
+def sync_api_s3(prefix):
     # Replace with your actual AWS credentials stored in environment variables
     aws_access_key_id = os.environ.get("AWS_ACCESS_KEY_ID")
     aws_secret_access_key = os.environ.get("AWS_SECRET_ACCESS_KEY")
@@ -36,6 +36,7 @@ def sync_api_s3(id_s3,prefix):
         "project": project
     }
 
+    id_s3 = os.environ.get("ID_S3_TARGET")
     print("id: " + id_s3)
     # Replace with the actual values for {id} and other parameters
     url_sync_s3 = service_endpoint + "/api/storages/export/s3/" + id_s3 + "/sync"
@@ -50,6 +51,5 @@ def sync_api_s3(id_s3,prefix):
         print(f"Error: {response_sync_s3.status_code} - {response_sync_s3.text}")
 
 
-id_s3 = str(sys.argv[1])
-s3_target_path = str(sys.argv[2])
-sync_api_s3(id_s3, s3_target_path)
+s3_target_path = str(sys.argv[1])
+sync_api_s3(s3_target_path)
