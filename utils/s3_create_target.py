@@ -47,7 +47,7 @@ def create_connection_api_s3(prefix):
 
     # Check the responses
     if response_create_s3.status_code == 201:
-        return id_s3
+        print(id_s3)
     else:
         print(f"Error: {response_create_s3.status_code} - {response_create_s3.text}")
 
