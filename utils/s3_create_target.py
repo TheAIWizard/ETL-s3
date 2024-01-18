@@ -46,7 +46,7 @@ def create_connection_api_s3(prefix):
     id_s3 = str(response_create_s3.json()["id"])  # s3 storage connection id
 
     # Check the responses
-    if response_create_s3.status_code == 200:
+    if response_create_s3.status_code == 201:
         print("Create export storage successful!")
         print(response_create_s3.json())
     else:

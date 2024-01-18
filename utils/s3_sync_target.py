@@ -44,9 +44,9 @@ def sync_api_s3(id_s3, prefix):
     response_sync_s3 = requests.post(url_sync_s3, data=json.dumps(payload_sync_s3), headers=headers)
 
     # Check the responses
-    if response_sync_s3.status_code == 200:
-        print("Sync export storage successful!")
-        print(response_sync_s3.json())
+    if response_sync_s3.status_code == 201:
+        #print("Sync export storage successful!")
+        #print(response_sync_s3.json())
     else:
         print(f"Error: {response_sync_s3.status_code} - {response_sync_s3.text}")
 
