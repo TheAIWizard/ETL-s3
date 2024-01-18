@@ -4,7 +4,6 @@ set -x
 SOURCE_PATH="s3/$S3_BUCKET/$S3_BUCKET_PREFIX_DEPOT_MANUEL"
 ARCHIVE_PATH="s3/$S3_BUCKET/$S3_BUCKET_PREFIX_ARCHIVE_DEPOT_MANUEL"
 TARGET_PATH="s3/$S3_BUCKET/$S3_BUCKET_PREFIX_ANNOTATION_TARGET"
-export ID_S3_TARGET=1
 
 # Retrieve activity description to annotate and archive them
 # 2>/dev/null suppress any error messages like syntax that may occur
@@ -38,4 +37,5 @@ else
 fi
 
 # Sync target S3
+python s3_create_target.py "$TARGET_PATH"
 python s3_sync_target.py "$TARGET_PATH"
