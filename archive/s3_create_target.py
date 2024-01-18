@@ -6,8 +6,8 @@ import requests
 
 def create_connection_api_s3(prefix):
     # Replace with your actual AWS credentials stored in environment variables
-    aws_access_key_id = "projet-ape-sa"
-    aws_secret_access_key = "0obEe7LB59g1Zj65nueDa84OQvrlyfPH"
+    aws_access_key_id = ""
+    aws_secret_access_key = ""
     # aws_session_token = os.environ.get("AWS_SESSION_TOKEN")
     bucket = "projet-ape"
     s3_endpoint = os.environ.get("S3_ENDPOINT")
