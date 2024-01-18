@@ -13,7 +13,7 @@ def create_connection_api_s3(prefix):
     s3_endpoint = os.environ.get("S3_ENDPOINT")
     service_endpoint = "https://projet-ape-102830.user.lab.sspcloud.fr"
     project = "1"
-    authorization_token = "ad7299c3e63b981ba7d8ba2410885d550c52f151"
+    authorization_token = ""
     # headers
     headers = {
         "Content-Type": "application/json",
