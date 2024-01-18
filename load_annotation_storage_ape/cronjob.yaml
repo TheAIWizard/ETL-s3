@@ -21,6 +21,8 @@ spec:
                 cd /tmp &&
                 wget https://raw.githubusercontent.com/TheAIWizard/ETL-s3/main/template/correspondance_intitule_nature_activite.json &&
                 wget https://raw.githubusercontent.com/TheAIWizard/ETL-s3/main/utils/s3_sync_source.py &&
+                wget https://raw.githubusercontent.com/TheAIWizard/ETL-s3/main/utils/s3_create_target.py &&
+                wget https://raw.githubusercontent.com/TheAIWizard/ETL-s3/main/utils/s3_sync_target.py &&
                 wget https://raw.githubusercontent.com/TheAIWizard/ETL-s3/main/utils/transform_to_json.py &&
                 wget https://raw.githubusercontent.com/TheAIWizard/ETL-s3/main/utils/transform_to_json.sh &&
                 chmod +x transform_to_json.sh &&
@@ -67,7 +69,7 @@ spec:
             - name: S3_BUCKET_PREFIX_ARCHIVE_DEPOT_MANUEL
               value: "Label Studio/Annotation APE 2024/NAF 2008/Extract manuelle/Archive annotations/"   # Replace with your S3 bucket prefix name
             - name: S3_BUCKET_PREFIX_ANNOTATION_TARGET
-              value: "Label Studio/Annotation APE 2024/NAF 2008/Annotation target/" 
+              value: "Label Studio/Annotation APE 2024/NAF 2008/Annotation target/Lot 1" 
           restartPolicy: Never
           serviceAccountName: send-batch-label-studio
           volumes:
