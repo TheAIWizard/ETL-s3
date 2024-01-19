@@ -39,5 +39,5 @@ fi
 # Create target S3 and export it just in case
 #export ID_S3_TARGET=$(python s3_create_target.py "$TARGET_PATH")
 # Sync target S3
-echo "$ID_S3_TARGET" #"84" 
-python s3_sync_target.py "2" "$TARGET_PATH"
+echo $ID_S3_TARGET #"84" 
+python s3_sync_target.py $ID_S3_TARGET "$TARGET_PATH"
