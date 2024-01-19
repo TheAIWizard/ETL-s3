@@ -22,7 +22,8 @@ if [ -n "$files" ]; then
                 python transform_to_json.py "$filename"
 
                 # Create target S3 and export in env just in case
-                export ID_S3_TARGET=$(python s3_create_target.py "$TARGET_PATH")
+                ID_S3_TARGET=$(python s3_create_target.py "$TARGET_PATH")
+                export ID_S3_TARGET=$ID_S3_TARGET
                 
                 # Move the treated batch data to the archive
                 mc mv "$SOURCE_PATH$filename" "$ARCHIVE_PATH"
