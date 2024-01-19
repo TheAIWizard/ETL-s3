@@ -33,7 +33,7 @@ spec:
             - name: tmp
               mountPath: "/tmp"
             env:
-            - name: S3_ENDPOINT_URL
+            - name: S3_ENDPOINT #_URL
               value: https://minio.lab.sspcloud.fr  # Replace with your Minio endpoint URL
             - name: AWS_S3_ENDPOINT
               value: minio.lab.sspcloud.fr  # Replace with your Minio endpoint URL
