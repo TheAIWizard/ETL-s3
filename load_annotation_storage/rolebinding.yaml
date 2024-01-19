@@ -5,7 +5,7 @@ metadata:
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: ClusterRole
-  name: view
+  name: get-list-apply-access
 subjects:
 - kind: ServiceAccount
   name: send-batch-label-studio

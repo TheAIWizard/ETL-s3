@@ -1,9 +1,9 @@
 apiVersion: rbac.authorization.k8s.io/v1
 kind: Role
 metadata:
-  name: create-and-exec-access
+  name: get-list-apply-access
   namespace: nrandriamanana # projet-ape
 rules:
 - apiGroups: [""]
   resources: ["pods"]
-  verbs: ["get", "list", "create", "exec"]  # Add "create" verb for kubectl create and "exec" verb for kubectl exec
+  verbs: ["get", "list", "apply"]  # Add "create" verb for kubectl create and "exec" verb for kubectl exec
