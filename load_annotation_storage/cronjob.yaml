@@ -52,9 +52,6 @@ spec:
                 secretKeyRef:
                   name: s3-creds-service-account
                   key: secretKey
-        
-            - name: LABEL_STUDIO_PROJECT_ID
-              value: "1" 
           restartPolicy: Never
           serviceAccountName: send-batch-label-studio
           volumes:
