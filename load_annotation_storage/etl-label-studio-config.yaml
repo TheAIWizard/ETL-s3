@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: etl-label-studio-config
+data:
+  S3_ENDPOINT: https://minio.lab.sspcloud.fr
+  AWS_S3_ENDPOINT: minio.lab.sspcloud.fr
+  AWS_DEFAULT_REGION: us-east-1
+  S3_BUCKET: nrandriamanana
+  S3_BUCKET_PREFIX_TRANSFORM_JSON: "Label Studio/Annotation APE 2024/Batch data json/"
+  S3_BUCKET_PREFIX_ANNOTATION_SOURCE: "Label Studio/Annotation APE 2024/Annotation source/"
+  S3_BUCKET_PREFIX_DEPOT_MANUEL: "Label Studio/Annotation APE 2024/Extract manuelle/"
+  S3_BUCKET_PREFIX_ARCHIVE_DEPOT_MANUEL: "Label Studio/Annotation APE 2024/Extract manuelle/Archive annotations/"
+  S3_BUCKET_PREFIX_ANNOTATION_TARGET: "/Label Studio/Annotation APE 2024/Annotation target/Lot 2/"
+  LABEL_STUDIO_SERVICE_ENDPOINT: https://user-nrandriamanana-680702.user.lab.sspcloud.fr
+  LABEL_STUDIO_PROJECT_ID: "1"
+  ID_S3_TARGET: "4"

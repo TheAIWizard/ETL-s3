@@ -22,7 +22,10 @@ if [ -n "$files" ]; then
                 python transform_to_json.py "$filename"
 
                 # Create target S3 
-                ID_S3_TARGET=$(python s3_create_target.py "$TARGET_PATH")
+                ID_S3_TARGET_VALUE=$(python s3_create_target.py "$TARGET_PATH")
+
+                # Create or update the ConfigMap
+                kubectl create configmap etl-label-studio-config --from-literal=ID_S3_TARGET=$ID_S3_TARGET_VALUE --dry-run=client -o yaml | kubectl apply -f -
                 
                 # Move the treated batch data to the archive
                 mc mv "$SOURCE_PATH$filename" "$ARCHIVE_PATH"
@@ -37,5 +40,6 @@ else
 fi
 
 
-echo $ID_S3_TARGET #"84" 
-python s3_sync_target.py "4" "$TARGET_PATH"
+echo $ID_S3_TARGET_VALUE
+echo $ID_S3_TARGET 
+python s3_sync_target.py $ID_S3_TARGET "$TARGET_PATH"
