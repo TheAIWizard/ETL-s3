@@ -32,16 +32,16 @@ spec:
             volumeMounts:
             - name: tmp
               mountPath: "/tmp"
+            envFrom:
+            - configMapRef:
+                    name: etl-label-studio-config
             env:
-            - name: ID_S3_TARGET
+            # from secrets
+            - name: LABEL_STUDIO_TOKEN
               valueFrom:
-                configMapRef:
-                  name: etl-label-studio-config
-                  key: ID_S3_TARGET
-            - name: S3_ENDPOINT #_URL
-              value: https://minio.lab.sspcloud.fr  # Replace with your Minio endpoint URL
-            - name: AWS_S3_ENDPOINT
-              value: minio.lab.sspcloud.fr  # Replace with your Minio endpoint URL
+                secretKeyRef:
+                  name: secret-label-studio-token
+                  key: token
             - name: AWS_ACCESS_KEY_ID
               valueFrom:
                 secretKeyRef:
@@ -52,29 +52,9 @@ spec:
                 secretKeyRef:
                   name: s3-creds-service-account
                   key: secretKey
-            - name: LABEL_STUDIO_SERVICE_ENDPOINT
-              value: https://user-nrandriamanana-680702.user.lab.sspcloud.fr # replace with your service endpoint
+        
             - name: LABEL_STUDIO_PROJECT_ID
-              value: "1" # replace with your project id
-            - name: LABEL_STUDIO_TOKEN
-              valueFrom:
-                secretKeyRef:
-                  name: secret-label-studio-token
-                  key: token
-            - name: AWS_DEFAULT_REGION
-              value: us-east-1
-            - name: S3_BUCKET
-              value: nrandriamanana  # Replace with your S3 bucket name
-            - name: S3_BUCKET_PREFIX_TRANSFORM_JSON
-              value: "Label Studio/Annotation APE 2024/Batch data json/"   # Replace with your S3 bucket prefix name
-            - name: S3_BUCKET_PREFIX_ANNOTATION_SOURCE
-              value: "Label Studio/Annotation APE 2024/Annotation source/"   # Replace with your S3 bucket prefix name
-            - name: S3_BUCKET_PREFIX_DEPOT_MANUEL
-              value: "Label Studio/Annotation APE 2024/Extract manuelle/"   # Replace with your S3 bucket prefix name
-            - name: S3_BUCKET_PREFIX_ARCHIVE_DEPOT_MANUEL
-              value: "Label Studio/Annotation APE 2024/Extract manuelle/Archive annotations/"   # Replace with your S3 bucket prefix name
-            - name: S3_BUCKET_PREFIX_ANNOTATION_TARGET
-              value: "/Label Studio/Annotation APE 2024/Annotation target/Lot 2/"
+              value: "1" 
           restartPolicy: Never
           serviceAccountName: send-batch-label-studio
           volumes:

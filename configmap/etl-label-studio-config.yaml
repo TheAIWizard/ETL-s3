@@ -13,6 +13,6 @@ data:
   S3_BUCKET_PREFIX_DEPOT_MANUEL: "Label Studio/Annotation APE 2024/Extract manuelle/"
   S3_BUCKET_PREFIX_ARCHIVE_DEPOT_MANUEL: "Label Studio/Annotation APE 2024/Extract manuelle/Archive annotations/"
   S3_BUCKET_PREFIX_ANNOTATION_TARGET: "/Label Studio/Annotation APE 2024/Annotation target/Lot 2/"
-  LABEL_STUDIO_SERVICE_ENDPOINT: https://user-nrandriamanana-680702.user.lab.sspcloud.fr
-  LABEL_STUDIO_PROJECT_ID: "1"
+  LABEL_STUDIO_SERVICE_ENDPOINT: https://user-nrandriamanana-680702.user.lab.sspcloud.fr # replace with your service endpoint
+  LABEL_STUDIO_PROJECT_ID: "1" # replace with your project id
   ID_S3_TARGET: "1"
