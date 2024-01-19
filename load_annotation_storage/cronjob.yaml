@@ -46,7 +46,7 @@ spec:
                   name: s3-creds-service-account
                   key: secretKey
             - name: LABEL_STUDIO_SERVICE_ENDPOINT
-              value: http://user-nrandriamanana-115611.user.lab.sspcloud.fr # replace with your service endpoint
+              value: user-nrandriamanana-680702.user.lab.sspcloud.fr # replace with your service endpoint
             - name: LABEL_STUDIO_TOKEN
               valueFrom:
                 secretKeyRef:

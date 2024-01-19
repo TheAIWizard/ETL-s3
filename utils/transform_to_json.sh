@@ -21,8 +21,8 @@ if [ -n "$files" ]; then
                 # Transform and save batch data to annotate
                 python transform_to_json.py "$filename"
 
-                # Create target S3
-                python s3_create_target.py "$TARGET_PATH"
+                # Create target S3 and export in env just in case
+                export ID_S3_TARGET=$(python s3_create_target.py "$TARGET_PATH")
                 
                 # Move the treated batch data to the archive
                 mc mv "$SOURCE_PATH$filename" "$ARCHIVE_PATH"
@@ -39,5 +39,5 @@ fi
 # Create target S3 and export it just in case
 #export ID_S3_TARGET=$(python s3_create_target.py "$TARGET_PATH")
 # Sync target S3
-echo "84" #"$ID_S3_TARGET"
-python s3_sync_target.py "84" "$TARGET_PATH"
+echo "$ID_S3_TARGET" #"84" 
+python s3_sync_target.py "$ID_S3_TARGET" "$TARGET_PATH"
