@@ -21,6 +21,8 @@ spec:
                 cd /tmp &&
                 wget https://raw.githubusercontent.com/TheAIWizard/ETL-s3/main/template/correspondance_intitule_nature_activite.json &&
                 wget https://raw.githubusercontent.com/TheAIWizard/ETL-s3/main/utils/s3_sync_source.py &&
+                wget https://raw.githubusercontent.com/TheAIWizard/ETL-s3/main/utils/s3_create_target.py &&
+                wget https://raw.githubusercontent.com/TheAIWizard/ETL-s3/main/utils/s3_sync_target.py &&
                 wget https://raw.githubusercontent.com/TheAIWizard/ETL-s3/main/utils/transform_to_json.py &&
                 wget https://raw.githubusercontent.com/TheAIWizard/ETL-s3/main/utils/transform_to_json.sh &&
                 chmod +x transform_to_json.sh &&
