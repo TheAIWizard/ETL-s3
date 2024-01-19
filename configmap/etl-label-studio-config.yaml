@@ -2,8 +2,9 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: etl-label-studio-config
-  namespace: user-nrandriamanana
+  namespace: user-nrandriamanana # projet-ape
 data:
+  namespace: user-nrandriamanana # projet-ape
   S3_ENDPOINT: https://minio.lab.sspcloud.fr
   AWS_S3_ENDPOINT: minio.lab.sspcloud.fr
   AWS_DEFAULT_REGION: us-east-1

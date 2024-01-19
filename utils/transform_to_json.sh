@@ -39,7 +39,7 @@ else
     echo "No files found for processing."
 fi
 
-echo kubectl get configmap etl-label-studio-config -n user-nrandriamanana -o json | jq -r '.data.ID_S3_TARGET'
+echo kubectl get configmap etl-label-studio-config -n $namespace -o json | jq -r '.data.ID_S3_TARGET'
 echo $ID_S3_TARGET_VALUE
 echo $ID_S3_TARGET 
 python s3_sync_target.py $ID_S3_TARGET "$TARGET_PATH"
