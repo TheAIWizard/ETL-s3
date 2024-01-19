@@ -23,9 +23,6 @@ if [ -n "$files" ]; then
 
                 # Create target S3 
                 ID_S3_TARGET_VALUE=$(python s3_create_target.py "$TARGET_PATH")
-
-                # Create or update the ConfigMap
-                kubectl create configmap toto-config --from-literal=ID_S3_TARGET=$ID_S3_TARGET_VALUE --dry-run=client -o yaml | kubectl apply -f -
                 
                 # Move the treated batch data to the archive
                 mc mv "$SOURCE_PATH$filename" "$ARCHIVE_PATH"
@@ -39,7 +36,7 @@ else
     echo "No files found for processing."
 fi
 
-echo kubectl get configmap etl-label-studio-config -n $namespace -o json | jq -r '.data.ID_S3_TARGET'
+
 echo $ID_S3_TARGET_VALUE
 echo $ID_S3_TARGET 
 python s3_sync_target.py $ID_S3_TARGET "$TARGET_PATH"
