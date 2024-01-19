@@ -47,6 +47,8 @@ spec:
                   key: secretKey
             - name: LABEL_STUDIO_SERVICE_ENDPOINT
               value: user-nrandriamanana-680702.user.lab.sspcloud.fr # replace with your service endpoint
+            - name: LABEL_STUDIO_PROJECT_ID
+              value: "1" # replace with your project id
             - name: LABEL_STUDIO_TOKEN
               valueFrom:
                 secretKeyRef:
@@ -64,6 +66,8 @@ spec:
               value: "Label Studio/Annotation APE 2024/Extract manuelle/"   # Replace with your S3 bucket prefix name
             - name: S3_BUCKET_PREFIX_ARCHIVE_DEPOT_MANUEL
               value: "Label Studio/Annotation APE 2024/Extract manuelle/Archive annotations/"   # Replace with your S3 bucket prefix name
+            - name: S3_BUCKET_PREFIX_ANNOTATION_TARGET
+              value: "/Label Studio/Annotation APE 2024/Annotation target/Lot 2/"
           restartPolicy: Never
           serviceAccountName: send-batch-label-studio
           volumes:
