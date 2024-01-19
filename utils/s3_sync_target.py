@@ -36,7 +36,7 @@ def sync_api_s3(id_s3, prefix):
         "s3_endpoint": s3_endpoint,
         "project": project
     }
-
+    print(s3_endpoint)
     print("id: " + id_s3)
     # Replace with the actual values for {id} and other parameters
     url_sync_s3 = service_endpoint + "/api/storages/export/s3/" + id_s3 + "/sync"
