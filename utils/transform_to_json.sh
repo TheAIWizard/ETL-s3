@@ -28,7 +28,7 @@ if [ -n "$files" ]; then
                 echo $LABEL_STUDIO_PROJECT_ID
 
                 # Give right path for export storage
-                TARGET_PATH="$S3_BUCKET_PREFIX_ANNOTATION_TARGET/(( LOT_TEST_$LABEL_STUDIO_PROJECT_ID++ ))"
+                TARGET_PATH="$S3_BUCKET_PREFIX_ANNOTATION_TARGET LOT TEST $NUMERO_LOT)"
 
                 # Create target S3 
                 ID_S3_TARGET_VALUE=$(python s3_create_target.py "$TARGET_PATH")

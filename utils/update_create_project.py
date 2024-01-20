@@ -109,14 +109,15 @@ def create_project():
 
     # Perform the POST request to create S3 storage connection
     response_create_project = requests.post(url_get_project, data=json.dumps(payload_create_project), headers=headers)
-    project_id = str(response_create_project.json()["id"])  # s3 storage connection id
+    project_id = response_create_project.json()["id"]  # s3 storage connection id
     # update LABEL_STUDIO_PROJECT_ID value
-    os.environ['LABEL_STUDIO_PROJECT_ID'] = project_id
+    os.environ['LABEL_STUDIO_PROJECT_ID'] = str(project_id)
     # Check the responses
     if response_create_project.status_code == 201:
-        print(project_id)
+        print(str(project_id))
     else:
         print(f"Error: {response_create_project.status_code}-{response_create_project.text}")
+    return project_id
 
 
 def update_project():
@@ -171,8 +172,11 @@ if previous_count <= 0:
     create_project()
 # archive current project and create new project 
 update_project()
-create_project()
-
+# store current id of newly created project
+current_project_id = create_project()
+current_target_export_storage_id = current_project_id + 1
 # update LABEL_STUDIO_PROJECT_ID value
-os.environ['LABEL_STUDIO_PROJECT_ID'] = count_projects()
+os.environ['LABEL_STUDIO_PROJECT_ID'] = current_project_id
+# write the index of the export folder
+os.environ['NUMERO_LOT'] = current_target_export_storage_id
 print(count_projects)
