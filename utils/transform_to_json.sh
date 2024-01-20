@@ -27,7 +27,7 @@ if [ -n "$files" ]; then
                 python transform_to_json.py "$filename"
 
                 # Give right path for export storage
-                TARGET_PATH="$S3_BUCKET_PREFIX_ANNOTATION_TARGET/LOT TEST $NUMERO_LOT"
+                TARGET_PATH="$S3_BUCKET_PREFIX_ANNOTATION_TARGET/LOT $NUMERO_LOT"
                 echo "TARGET_PATH is set to: $TARGET_PATH"
 
                 # Create target S3 
@@ -52,7 +52,7 @@ else
 fi
 
 
-echo $ID_S3_TARGET_VALUE
+# echo $ID_S3_TARGET_VALUE
 echo $ID_S3_TARGET 
 # sync export storage with s3
-python s3_sync_target.py $ID_S3_TARGET "$TARGET_PATH"
+python s3_sync_target.py $ID_S3_TARGET "$S3_BUCKET_PREFIX_ANNOTATION_TARGET"
