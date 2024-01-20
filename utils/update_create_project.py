@@ -132,9 +132,6 @@ def update_project():
         "Authorization": f"Token {authorization_token}"
     }
 
-    # project_id = os.environ.get('PROJECT_ID')
-    # print(project_id)
-    print(count_projects())
     payload_update_project = {
         # "title": "Lot "+date_actuelle,
         "title": f"Lot {count_projects()+1}",
@@ -175,13 +172,14 @@ def update_project():
 if previous_count <= 0:
     # create first project
     create_project()
-# archive current project and create new project 
-update_project()
-# store current id of newly created project
-current_project_id = create_project()
-current_target_export_storage_id = current_project_id + 1
-# update LABEL_STUDIO_PROJECT_ID value
-os.environ['LABEL_STUDIO_PROJECT_ID'] = str(current_project_id)
-# write the index of the export folder
-os.environ['NUMERO_LOT'] = str(current_target_export_storage_id)
-print(str(current_target_export_storage_id))
+else:
+    # archive current project and create new project 
+    update_project()
+    # store current id of newly created project
+    current_project_id = create_project()
+    current_target_export_storage_id = current_project_id + 1
+    # update LABEL_STUDIO_PROJECT_ID value
+    os.environ['LABEL_STUDIO_PROJECT_ID'] = str(current_project_id)
+    # write the index of the export folder
+    os.environ['NUMERO_LOT'] = str(current_target_export_storage_id)
+    print(str(current_target_export_storage_id))
