@@ -3,7 +3,7 @@ set -x
 
 SOURCE_PATH="s3/$S3_BUCKET/$S3_BUCKET_PREFIX_DEPOT_MANUEL"
 ARCHIVE_PATH="s3/$S3_BUCKET/$S3_BUCKET_PREFIX_ARCHIVE_DEPOT_MANUEL"
-TARGET_PATH="$S3_BUCKET_PREFIX_ANNOTATION_TARGET"
+
 
 # Retrieve activity description to annotate and archive them
 # 2>/dev/null suppress any error messages like syntax that may occur
@@ -18,12 +18,24 @@ if [ -n "$files" ]; then
                 # Retrieve activity description from s3
                 mc cp --recursive "$SOURCE_PATH$filename" ./
                 
+                # Create or manage label studio project
+                python update_create_project.py
+
                 # Transform and save batch data to annotate
                 python transform_to_json.py "$filename"
+                
+                # Check current project id count
+                echo $LABEL_STUDIO_PROJECT_ID
+
+                # Give right path for export storage
+                TARGET_PATH="$S3_BUCKET_PREFIX_ANNOTATION_TARGET/(( LOT_TEST_$LABEL_STUDIO_PROJECT_ID++ ))"
 
                 # Create target S3 
                 ID_S3_TARGET_VALUE=$(python s3_create_target.py "$TARGET_PATH")
-                
+
+                # Sync export storage with s3
+                python s3_sync_target.py $ID_S3_TARGET "$TARGET_PATH"
+
                 # Move the treated batch data to the archive
                 mc mv "$SOURCE_PATH$filename" "$ARCHIVE_PATH"
                 ;;
@@ -39,4 +51,5 @@ fi
 
 echo $ID_S3_TARGET_VALUE
 echo $ID_S3_TARGET 
+# sync export storage with s3
 python s3_sync_target.py $ID_S3_TARGET "$TARGET_PATH"
