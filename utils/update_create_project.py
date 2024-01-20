@@ -176,7 +176,7 @@ update_project()
 current_project_id = create_project()
 current_target_export_storage_id = current_project_id + 1
 # update LABEL_STUDIO_PROJECT_ID value
-os.environ['LABEL_STUDIO_PROJECT_ID'] = current_project_id
+os.environ['LABEL_STUDIO_PROJECT_ID'] = str(current_project_id)
 # write the index of the export folder
-os.environ['NUMERO_LOT'] = current_target_export_storage_id
+os.environ['NUMERO_LOT'] = str(current_target_export_storage_id)
 print(count_projects)
