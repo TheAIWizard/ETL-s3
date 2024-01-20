@@ -37,7 +37,7 @@ def get_week_info_french(date=None):
 
     week_info = f"{iso_week_number}{suffix} semaine de {month_name} {iso_year}"
 
-    return f"{week_info}: {formatted_date}"
+    return f"{week_info}"
 
 
 # store previous count
