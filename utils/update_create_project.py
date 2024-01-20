@@ -149,7 +149,9 @@ def update_project():
 
 if previous_count <= 0:
     # create first project
-    create_project()
+    current_project_id = create_project()
+    current_target_export_storage_id = current_project_id + 1
+    print(str(current_target_export_storage_id))
 else:
     # archive current project and create new project 
     update_project()
