@@ -28,13 +28,13 @@ if [ -n "$files" ]; then
                 echo $LABEL_STUDIO_PROJECT_ID
 
                 # Give right path for export storage
-                TARGET_PATH="$S3_BUCKET_PREFIX_ANNOTATION_TARGET LOT TEST $NUMERO_LOT)"
+                TARGET_PATH="$S3_BUCKET_PREFIX_ANNOTATION_TARGET LOT TEST $NUMERO_LOT"
 
                 # Create target S3 
-                ID_S3_TARGET_VALUE=$(python s3_create_target.py "$TARGET_PATH")
+                ID_S3_TARGET_VALUE=$(python s3_create_target.py "$TARGET_PATH"
 
                 # Sync export storage with s3
-                python s3_sync_target.py $ID_S3_TARGET "$TARGET_PATH"
+                python s3_sync_target.py $ID_S3_TARGET_VALUE "$TARGET_PATH"
 
                 # Move the treated batch data to the archive
                 mc mv "$SOURCE_PATH$filename" "$ARCHIVE_PATH"

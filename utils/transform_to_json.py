@@ -37,7 +37,7 @@ def save_to_s3(data, bucket: str, path: str, file_path: str):
     current_date = datetime.now(local_timezone).strftime('%Y-%m-%d_%H-%M-%S')
 
     fs = s3fs.S3FileSystem(
-        client_kwargs={"endpoint_url": os.getenv("S3_ENDPOINT_URL")},
+        client_kwargs={"endpoint_url": os.getenv("S3_ENDPOINT")},
         key=os.getenv("AWS_ACCESS_KEY_ID"),
         secret=os.getenv("AWS_SECRET_ACCESS_KEY"),
     )
