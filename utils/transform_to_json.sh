@@ -19,7 +19,7 @@ if [ -n "$files" ]; then
                 mc cp --recursive "$SOURCE_PATH$filename" ./
                 
                 # Create or manage label studio project
-                NUMERO_LOT=python update_create_project.py
+                NUMERO_LOT=$(python update_create_project.py)
                 # Check current project id count
                 echo ID PROJET: $LABEL_STUDIO_PROJECT_ID
 
