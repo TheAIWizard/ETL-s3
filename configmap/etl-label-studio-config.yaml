@@ -16,4 +16,4 @@ data:
   S3_BUCKET_PREFIX_ANNOTATION_TARGET: "/Label Studio/Annotation APE 2024/Annotation target"
   LABEL_STUDIO_SERVICE_ENDPOINT: https://user-nrandriamanana-680702.user.lab.sspcloud.fr # replace with your service endpoint
   LABEL_STUDIO_PROJECT_ID: "1" # replace with your project id
-  ID_S3_TARGET: "2"
+  ID_S3_TARGET: "1"
