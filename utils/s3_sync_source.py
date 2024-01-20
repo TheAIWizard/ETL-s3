@@ -72,13 +72,13 @@ def sync_api_s3(prefix):
 
     # Check the responses
     if response_create_s3.status_code == 200:
-        print("Create export storage successful!")
+        print("Create import source storage successful!")
         print(response_create_s3.json())
     else:
         print(f"Error: {response_create_s3.status_code} - {response_create_s3.text}")
 
     if response_sync_s3.status_code == 200:
-        print("Sync export storage successful!")
+        print("Sync import source storage successful!")
         print(response_sync_s3.json())
     else:
         print(f"Error: {response_sync_s3.status_code} - {response_sync_s3.text}")

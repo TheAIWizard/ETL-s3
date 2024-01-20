@@ -56,3 +56,4 @@ id_s3 = str(sys.argv[1])
 s3_target_path = str(sys.argv[2])
 numero_lot = count_projects()+1
 sync_api_s3(id_s3, s3_target_path + f"/Lot {numero_lot}")
+print(f"Project count : {count_projects()}")
