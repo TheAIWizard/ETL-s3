@@ -53,12 +53,13 @@ def count_projects():
 
     # Perform the POST request to create S3 storage connection
     response_get = requests.get(url_get_project, headers=headers)
-    count = response_get.json()["count"] # s3 storage connection id
     # Check the responses
     if response_get.status_code == 200:
+        count = response_get.json()["count"] # s3 storage connection id
         print(count)
     else:
         print(f"Error: {response_get.status_code}")
+        count = 0
     return count
 
 # store previous count
