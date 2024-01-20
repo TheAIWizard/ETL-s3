@@ -8,8 +8,8 @@ with open("taxonomy.xml", 'r', encoding='utf-8') as file:
 
 
 def validate_xml(xml_template):
-    service_endpoint = # os.getenv("LABEL_STUDIO_SERVICE_ENDPOINT")
-    authorization_token = # os.getenv("LABEL_STUDIO_TOKEN")
+    service_endpoint = os.getenv("LABEL_STUDIO_SERVICE_ENDPOINT")
+    authorization_token = os.getenv("LABEL_STUDIO_TOKEN")
     # headers
     headers = {
         "Content-Type": "application/json",
@@ -31,5 +31,6 @@ def validate_xml(xml_template):
     else:
         pass
         print(f"Error: {response_validate_xml.status_code}-{response_validate_xml.text}")
+
 
 validate_xml(xml_template)

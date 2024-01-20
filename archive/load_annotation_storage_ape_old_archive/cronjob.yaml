@@ -3,11 +3,11 @@ kind: CronJob
 metadata:
   name: send-batch-label-studio
 spec:
-  schedule: "*/2 * * * *" # toutes les 2 minutes, si on veut faire toutes les minutes : "* * * * *"
+  schedule: "* * * * *" # toutes les minutes, si on veut faire toutes les 2 minutes : "*/2 * * * *"
   concurrencyPolicy: Forbid # ensure only one pod is running at a time
   jobTemplate:
     spec:
-      backoffLimit: 0  # Number of retries before considering the Job as failed
+      backoffLimit: 1  # Number of retries before considering the Job as failed
       template:
         spec:
           containers:
@@ -19,11 +19,7 @@ spec:
               - "-c"
               - |
                 cd /tmp &&
-                wget https://raw.githubusercontent.com/TheAIWizard/custom-taxonomy-template/main/instructions.txt &&
-                wget https://raw.githubusercontent.com/TheAIWizard/custom-taxonomy-template/main/taxonomy.xml &&
                 wget https://raw.githubusercontent.com/TheAIWizard/ETL-s3/main/template/correspondance_intitule_nature_activite.json &&
-                wget https://raw.githubusercontent.com/TheAIWizard/ETL-s3/main/utils/count_project_id.py &&
-                wget https://raw.githubusercontent.com/TheAIWizard/ETL-s3/main/utils/update_create_project.py &&
                 wget https://raw.githubusercontent.com/TheAIWizard/ETL-s3/main/utils/s3_sync_source.py &&
                 wget https://raw.githubusercontent.com/TheAIWizard/ETL-s3/main/utils/s3_create_target.py &&
                 wget https://raw.githubusercontent.com/TheAIWizard/ETL-s3/main/utils/s3_sync_target.py &&
@@ -36,16 +32,11 @@ spec:
             volumeMounts:
             - name: tmp
               mountPath: "/tmp"
-            envFrom:
-            - configMapRef:
-                    name: label-studio-config-projet-ape
             env:
-            # from secrets
-            - name: LABEL_STUDIO_TOKEN
-              valueFrom:
-                secretKeyRef:
-                  name: secret-label-studio-token
-                  key: token
+            - name: S3_ENDPOINT_URL
+              value: https://minio.lab.sspcloud.fr  # Replace with your Minio endpoint URL
+            - name: AWS_S3_ENDPOINT
+              value: minio.lab.sspcloud.fr  # Replace with your Minio endpoint URL
             - name: AWS_ACCESS_KEY_ID
               valueFrom:
                 secretKeyRef:
@@ -56,6 +47,29 @@ spec:
                 secretKeyRef:
                   name: my-s3-creds
                   key: secretKey
+            - name: LABEL_STUDIO_SERVICE_ENDPOINT
+              value: http://projet-ape-102830.user.lab.sspcloud.fr # replace with your service endpoint
+            - name: LABEL_STUDIO_PROJECT_ID
+              value: "1" # replace with your project id
+            - name: LABEL_STUDIO_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: secret-label-studio-token
+                  key: token
+            - name: AWS_DEFAULT_REGION
+              value: us-east-1
+            - name: S3_BUCKET
+              value: projet-ape # Replace with your S3 bucket name
+            - name: S3_BUCKET_PREFIX_TRANSFORM_JSON
+              value: "Label Studio/Annotation APE 2024/NAF 2008/Batch data json/"   # Replace with your S3 bucket prefix name
+            - name: S3_BUCKET_PREFIX_ANNOTATION_SOURCE
+              value: "Label Studio/Annotation APE 2024/NAF 2008/Annotation source/"   # Replace with your S3 bucket prefix name
+            - name: S3_BUCKET_PREFIX_DEPOT_MANUEL
+              value: "Label Studio/Annotation APE 2024/NAF 2008/Extract manuelle/"   # Replace with your S3 bucket prefix name
+            - name: S3_BUCKET_PREFIX_ARCHIVE_DEPOT_MANUEL
+              value: "Label Studio/Annotation APE 2024/NAF 2008/Extract manuelle/Archive annotations/"   # Replace with your S3 bucket prefix name
+            - name: S3_BUCKET_PREFIX_ANNOTATION_TARGET
+              value: "/Label Studio/Annotation APE 2024/NAF 2008/Annotation target/Lot 2/" 
           restartPolicy: Never
           serviceAccountName: send-batch-label-studio
           volumes:
