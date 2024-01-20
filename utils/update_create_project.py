@@ -63,7 +63,7 @@ def create_project():
     date_actuelle = get_week_info_french(current_date)
     payload_create_project = {
         "title": f"Lot {count_projects()+2}",
-        "description": "Opération qualité FastText (NAF 2008) - Campagne d'annotation des libellés d'activités: "+ date_actuelle,
+        "description": "Série en cours d'annotation - Opération qualité FastText (NAF 2008) - Campagne d'annotation des libellés d'activités: "+ date_actuelle,
         "label_config": xml_template,
         "expert_instruction": instructions,
         "show_instruction": True,
@@ -113,6 +113,7 @@ def update_project():
     payload_update_project = {
         # "title": "Lot "+date_actuelle,
         "title": f"Lot {count_projects()+1}",
+        "description": "Série terminée - Opération qualité FastText (NAF 2008) - Campagne d'annotation des libellés d'activités: "+ date_actuelle,
         "label_config": xml_template,
         "expert_instruction": instructions,
         "show_instruction": True,
