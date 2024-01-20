@@ -55,4 +55,4 @@ fi
 echo $ID_S3_TARGET_VALUE
 echo $ID_S3_TARGET 
 # sync export storage with s3
-python s3_sync_target.py $ID_S3_TARGET_VALUE "$TARGET_PATH"
+python s3_sync_target.py $ID_S3_TARGET "$TARGET_PATH"
