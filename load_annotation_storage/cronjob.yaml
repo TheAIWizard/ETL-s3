@@ -7,7 +7,7 @@ spec:
   concurrencyPolicy: Forbid # ensure only one pod is running at a time
   jobTemplate:
     spec:
-      backoffLimit: 0  # Number of retries before considering the Job as failed
+      backoffLimit: 1  # Number of retries before considering the Job as failed
       template:
         spec:
           containers:
