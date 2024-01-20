@@ -25,9 +25,6 @@ if [ -n "$files" ]; then
 
                 # Transform and save batch data to annotate
                 python transform_to_json.py "$filename"
-                
-                # Check current project id count
-                echo $LABEL_STUDIO_PROJECT_ID
 
                 # Give right path for export storage
                 TARGET_PATH="$S3_BUCKET_PREFIX_ANNOTATION_TARGET LOT TEST $NUMERO_LOT"
@@ -35,6 +32,8 @@ if [ -n "$files" ]; then
 
                 # Create target S3 
                 ID_S3_TARGET_VALUE=$(python s3_create_target.py "$TARGET_PATH")
+                # Export target path
+                export TARGET_PATH=$TARGET_PATH
 
                 # Sync export storage with s3
                 python s3_sync_target.py $ID_S3_TARGET_VALUE "$TARGET_PATH"
