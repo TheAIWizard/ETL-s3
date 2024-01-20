@@ -56,11 +56,11 @@ def count_projects():
     # Check the responses
     if response_get.status_code == 200:
         count = response_get.json()["count"] # s3 storage connection id
-        print(count)
     else:
         print(f"Error: {response_get.status_code}")
         count = 0
     return count
+
 
 # store previous count
 previous_count = count_projects()
@@ -115,9 +115,11 @@ def create_project():
     os.environ['LABEL_STUDIO_PROJECT_ID'] = str(project_id)
     # Check the responses
     if response_create_project.status_code == 201:
-        print(str(project_id))
+        pass
+        # print(str(project_id))
     else:
-        print(f"Error: {response_create_project.status_code}-{response_create_project.text}")
+        pass
+        # print(f"Error: {response_create_project.status_code}-{response_create_project.text}")
     return project_id
 
 
@@ -163,9 +165,11 @@ def update_project():
     # project_id = str(response_update_project.json()["id"])  # s3 storage connection id
     # Check the responses
     if response_update_project.status_code == 201:
-        print("Project done. Next now !")
+        pass
+        # print("Project done. Next now !")
     else:
-        print(f"Error: {response_update_project.status_code}-{response_update_project.text}")
+        pass
+        # print(f"Error: {response_update_project.status_code}-{response_update_project.text}")
 
 
 if previous_count <= 0:
@@ -180,4 +184,4 @@ current_target_export_storage_id = current_project_id + 1
 os.environ['LABEL_STUDIO_PROJECT_ID'] = str(current_project_id)
 # write the index of the export folder
 os.environ['NUMERO_LOT'] = str(current_target_export_storage_id)
-print(current_target_export_storage_id)
+print(str(current_target_export_storage_id))
