@@ -1,7 +1,7 @@
 *.parquet
 *.csv
 *.json
-*.py
+*update_project.py
 
 !correspondance_intitule_nature_activite.json
 
