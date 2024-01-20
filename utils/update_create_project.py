@@ -113,7 +113,7 @@ def update_project():
     payload_update_project = {
         # "title": "Lot "+date_actuelle,
         "title": f"Lot {count_projects()+1}",
-        "description": "Série terminée - Opération qualité FastText (NAF 2008) - Campagne d'annotation des libellés d'activités: "+ date_actuelle,
+        "description": "Série terminée - Opération qualité FastText (NAF 2008) - Campagne d'annotation des libellés d'activités: ",
         "label_config": xml_template,
         "expert_instruction": instructions,
         "show_instruction": True,
