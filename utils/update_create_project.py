@@ -29,7 +29,6 @@ def get_week_info_french(date=None):
     formatted_date = date.strftime("%A %d/%B %Y")
 
     iso_year, iso_week_number, iso_weekday = date.isocalendar()
-    
     # Utiliser le dictionnaire pour traduire le nom du mois
     month_name = MONTH_TRANSLATION[date.strftime("%B")]
 
@@ -91,7 +90,7 @@ def create_project():
         "show_instruction": True,
         "show_skip_button": True,
         "enable_empty_annotation": False, # désactiver annotation vide
-        "show_annotation_history": True,
+        "show_annotation_history": False,
         "organization": 1,
         "color": "green",
         "maximum_annotations": 1,
@@ -173,3 +172,7 @@ if previous_count <= 0:
 # archive current project and create new project 
 update_project()
 create_project()
+
+# update LABEL_STUDIO_PROJECT_ID value
+os.environ['LABEL_STUDIO_PROJECT_ID'] = count_projects()
+print(count_projects)

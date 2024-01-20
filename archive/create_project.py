@@ -29,7 +29,6 @@ def get_week_info_french(date=None):
     formatted_date = date.strftime("%A %d/%B %Y")
 
     iso_year, iso_week_number, iso_weekday = date.isocalendar()
-    
     # Utiliser le dictionnaire pour traduire le nom du mois
     month_name = MONTH_TRANSLATION[date.strftime("%B")]
 
