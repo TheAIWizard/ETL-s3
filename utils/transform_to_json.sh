@@ -19,7 +19,9 @@ if [ -n "$files" ]; then
                 mc cp --recursive "$SOURCE_PATH$filename" ./
                 
                 # Create or manage label studio project
-                python update_create_project.py
+                NUMERO_LOT=python update_create_project.py
+                # Check current project id count
+                echo ID PROJET: $LABEL_STUDIO_PROJECT_ID
 
                 # Transform and save batch data to annotate
                 python transform_to_json.py "$filename"
@@ -39,6 +41,7 @@ if [ -n "$files" ]; then
 
                 # Move the treated batch data to the archive
                 mc mv "$SOURCE_PATH$filename" "$ARCHIVE_PATH"
+                
                 ;;
             *)
                 echo "$filename is not a file to annotate"

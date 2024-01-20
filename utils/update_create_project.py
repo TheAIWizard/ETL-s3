@@ -179,4 +179,4 @@ current_target_export_storage_id = current_project_id + 1
 os.environ['LABEL_STUDIO_PROJECT_ID'] = str(current_project_id)
 # write the index of the export folder
 os.environ['NUMERO_LOT'] = str(current_target_export_storage_id)
-print(count_projects)
+print(current_target_export_storage_id)
