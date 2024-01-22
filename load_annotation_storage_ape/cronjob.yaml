@@ -22,7 +22,7 @@ spec:
                 wget https://raw.githubusercontent.com/TheAIWizard/custom-taxonomy-template/main/instructions.txt &&
                 wget https://raw.githubusercontent.com/TheAIWizard/custom-taxonomy-template/main/taxonomy.xml &&
                 wget https://raw.githubusercontent.com/TheAIWizard/ETL-s3/main/template/correspondance_intitule_nature_activite.json &&
-                wget https://raw.githubusercontent.com/TheAIWizard/ETL-s3/main/utils/get_last_target_folder_id.py &&
+                wget https://raw.githubusercontent.com/TheAIWizard/ETL-s3/main/utils/get_last_current_folder_id.py &&
                 wget https://raw.githubusercontent.com/TheAIWizard/ETL-s3/main/utils/get_last_target_folder_id.py &&
                 wget https://raw.githubusercontent.com/TheAIWizard/ETL-s3/main/utils/count_project_id.py &&
                 wget https://raw.githubusercontent.com/TheAIWizard/ETL-s3/main/utils/update_create_project.py &&
