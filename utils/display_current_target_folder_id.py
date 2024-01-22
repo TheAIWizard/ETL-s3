@@ -1,3 +1,3 @@
-from get_current_target_folder_id import get_current_target_folder
+from get_last_target_folder_id import get_highest_integer_from_folders
 
-print(get_current_target_folder())
+print(get_highest_integer_from_folders()+1)
