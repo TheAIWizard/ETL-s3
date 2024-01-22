@@ -80,3 +80,4 @@ echo "Folder to sync: Lot $NUMERO_LOT"
 TARGET_PATH="$S3_BUCKET_PREFIX_ANNOTATION_TARGET/Lot $NUMERO_LOT"
 # sync export storage with s3
 python s3_sync_target.py $ID_S3_TARGET "$TARGET_PATH"
+mc cp /dev/null "$S3_BUCKET_PREFIX_ANNOTATION_TARGET/create test"
