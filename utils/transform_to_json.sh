@@ -18,10 +18,15 @@ if [ -n "$files" ]; then
                 # Retrieve activity description from s3
                 mc cp --recursive "$SOURCE_PATH$filename" ./
                 
-                # Create or manage label studio project
-                NUMERO_LOT=$(python update_create_project.py)
-                # Check current project id count
-                echo ID PROJET: $LABEL_STUDIO_PROJECT_ID
+                # Create or update/create label studio project
+                python update_create_project.py
+
+                # Get export folder name for annotated data after creation
+                NUMERO_LOT=$(python get_last_target_folder_id.py)
+                # Get current project id 
+                LABEL_STUDIO_PROJECT_ID=$(python get_last_target_folder_id.py)
+                # Check current project id (according to label studio)
+                echo CURRENT LABEL STUDIO ID PROJET: $LABEL_STUDIO_PROJECT_ID
 
                 # Transform and save batch data to annotate
                 python transform_to_json.py "$filename"

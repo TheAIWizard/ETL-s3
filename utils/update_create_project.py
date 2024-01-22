@@ -2,7 +2,8 @@ import os
 import json
 import requests
 from datetime import datetime
-from count_project_id import count_projects
+from count_project_id import count_projects, get_last_pk
+from get_last_target_folder_id import get_highest_integer_from_folders
 
 
 # Dictionnaire de correspondance des mois anglais vers français
@@ -27,7 +28,7 @@ def get_week_info_french(date=None):
         date = datetime.now()
 
     # Format the date without the hour
-    formatted_date = date.strftime("%A %d/%B %Y")
+    # formatted_date = date.strftime("%A %d/%B %Y")
 
     iso_year, iso_week_number, iso_weekday = date.isocalendar()
     # Utiliser le dictionnaire pour traduire le nom du mois
@@ -61,8 +62,11 @@ def create_project():
 
     current_date = datetime.now()
     date_actuelle = get_week_info_french(current_date)
+    # get the id of the last s3 folder created as export storage for annotated data
+    bucket, prefix = os.getenv("S3_BUCKET"), os.getenv("S3_BUCKET_PREFIX_ANNOTATION_TARGET")
+    delta = get_highest_integer_from_folders(bucket, prefix)
     payload_create_project = {
-        "title": f"Lot {count_projects()+2}",
+        "title": f"Lot {delta+1}",
         "description": "Série en cours d'annotation - Opération qualité FastText (NAF 2008) - Campagne d'annotation des libellés d'activités: "+ date_actuelle,
         "label_config": xml_template,
         "expert_instruction": instructions,
@@ -109,10 +113,12 @@ def update_project():
         "Content-Type": "application/json",
         "Authorization": f"Token {authorization_token}"
     }
-
+    # get the id of the last s3 folder created as export storage for annotated data
+    bucket, prefix = os.getenv("S3_BUCKET"), os.getenv("S3_BUCKET_PREFIX_ANNOTATION_TARGET")
+    delta = get_highest_integer_from_folders(bucket, prefix)
     payload_update_project = {
         # "title": "Lot "+date_actuelle,
-        "title": f"Lot {count_projects()+1}",
+        "title": f"Lot {delta}",
         "description": "Série terminée - Opération qualité FastText (NAF 2008) - Campagne d'annotation des libellés d'activités: ",
         "label_config": xml_template,
         "expert_instruction": instructions,
@@ -134,7 +140,7 @@ def update_project():
         }
 
     # Create new s3 storage for annotation source
-    url_get_project = f"{service_endpoint}/api/projects/{str(count_projects())}/"
+    url_get_project = f"{service_endpoint}/api/projects/{str(get_last_pk())}/"
 
     # Perform the POST request to create S3 storage connection
     response_update_project = requests.patch(url_get_project, data=json.dumps(payload_update_project), headers=headers)
@@ -150,17 +156,9 @@ def update_project():
 
 if previous_count <= 0:
     # create first project
-    current_project_id = create_project()
-    current_target_export_storage_id = current_project_id + 1
-    print(str(current_target_export_storage_id))
+    create_project()
 else:
-    # archive current project and create new project 
+    # archive current project and create new project
     update_project()
     # store current id of newly created project
-    current_project_id = create_project()
-    current_target_export_storage_id = current_project_id + 1
-    # update LABEL_STUDIO_PROJECT_ID value
-    os.environ['LABEL_STUDIO_PROJECT_ID'] = str(current_project_id)
-    # write the index of the export folder
-    os.environ['NUMERO_LOT'] = str(current_target_export_storage_id)
-    print(str(current_target_export_storage_id))
+    create_project()
