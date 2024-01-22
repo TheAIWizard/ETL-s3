@@ -63,8 +63,8 @@ def create_project():
     current_date = datetime.now()
     date_actuelle = get_week_info_french(current_date)
     # get the id of the last s3 folder created as export storage for annotated data
-    bucket, prefix = os.getenv("S3_BUCKET"), os.getenv("S3_BUCKET_PREFIX_ANNOTATION_TARGET")
-    delta = get_highest_integer_from_folders(bucket, prefix)
+    # bucket, prefix = os.getenv("S3_BUCKET"), os.getenv("S3_BUCKET_PREFIX_ANNOTATION_TARGET")
+    delta = get_highest_integer_from_folders()
     payload_create_project = {
         "title": f"Lot {delta+1}",
         "description": "Série en cours d'annotation - Opération qualité FastText (NAF 2008) - Campagne d'annotation des libellés d'activités: "+ date_actuelle,
@@ -114,8 +114,8 @@ def update_project():
         "Authorization": f"Token {authorization_token}"
     }
     # get the id of the last s3 folder created as export storage for annotated data
-    bucket, prefix = os.getenv("S3_BUCKET"), os.getenv("S3_BUCKET_PREFIX_ANNOTATION_TARGET")
-    delta = get_highest_integer_from_folders(bucket, prefix)
+    # bucket, prefix = os.getenv("S3_BUCKET"), os.getenv("S3_BUCKET_PREFIX_ANNOTATION_TARGET")
+    delta = get_highest_integer_from_folders()
     payload_update_project = {
         # "title": "Lot "+date_actuelle,
         "title": f"Lot {delta}",
