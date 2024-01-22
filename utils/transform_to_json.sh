@@ -33,9 +33,9 @@ if [ -n "$files" ]; then
                 # Create an empty file (placeholder)
                 echo "" > placeholder.txt
                 # Upload the empty file to MinIO
-                mc cp placeholder.txt "s3$S3_BUCKET/$S3_BUCKET_PREFIX_ANNOTATION_TARGET/Lot $NUMERO_LOT/"
+                mc cp placeholder.txt "s3/$S3_BUCKET/$S3_BUCKET_PREFIX_ANNOTATION_TARGET/Lot $NUMERO_LOT/"
                 # Remove the placeholder file from MinIO
-                mc rm "s3$S3_BUCKET/$S3_BUCKET_PREFIX_ANNOTATION_TARGET/Lot $NUMERO_LOT/placeholder.txt"
+                mc rm "s3/$S3_BUCKET/$S3_BUCKET_PREFIX_ANNOTATION_TARGET/Lot $NUMERO_LOT/placeholder.txt"
                 # Optional: Remove the local placeholder file
                 rm placeholder.txt
 
