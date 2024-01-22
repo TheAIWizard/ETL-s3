@@ -28,6 +28,7 @@ if [ -n "$files" ]; then
 
                 # Get current export folder name for annotated data after creation
                 NUMERO_LOT=$(python display_current_target_folder_id.py)
+                echo "Folder to sync: Lot $NUMERO_LOT"
                 # Get current project id 
                 LABEL_STUDIO_PROJECT_ID=$(python count_project_id.py)
                 # Export as env variable
