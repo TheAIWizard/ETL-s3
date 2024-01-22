@@ -33,7 +33,7 @@ if [ -n "$files" ]; then
                 # Create an empty file (placeholder)
                 echo "" > placeholder.txt
                 # Upload the empty file to MinIO
-                mc cp placeholder.txt "s3/$S3_BUCKET$S3_BUCKET_PREFIX_ANNOTATION_TARGET/Lot $NUMERO_LOT/"
+                mc cp placeholder.txt "s3/$S3_BUCKET $S3_BUCKET_PREFIX_ANNOTATION_TARGET/Lot $NUMERO_LOT/"
                 # Optional: Remove the local placeholder file
                 rm placeholder.txt
 
@@ -88,7 +88,7 @@ python s3_sync_target.py $ID_S3_TARGET "$TARGET_PATH"
 # Check if the placeholder file exists in MinIO
 if mc ls "s3/$S3_BUCKET$S3_BUCKET_PREFIX_ANNOTATION_TARGET/Lot $NUMERO_LOT/placeholder.txt"; then
     # Remove the placeholder file from MinIO
-    mc rm "s3/$S3_BUCKET$S3_BUCKET_PREFIX_ANNOTATION_TARGET/Lot $NUMERO_LOT/placeholder.txt"
+    #mc rm "s3/$S3_BUCKET$S3_BUCKET_PREFIX_ANNOTATION_TARGET/Lot $NUMERO_LOT/placeholder.txt"
     echo "Placeholder file removed from MinIO."
 else
     echo "Placeholder file does not exist in MinIO. No removal needed."
