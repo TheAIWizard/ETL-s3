@@ -69,8 +69,6 @@ LABEL_STUDIO_PROJECT_ID=$(python count_project_id.py)
 export LABEL_STUDIO_PROJECT_ID=$LABEL_STUDIO_PROJECT_ID
 # Check current project id (according to label studio)
 echo CURRENT LABEL STUDIO ID PROJET: $LABEL_STUDIO_PROJECT_ID
-# echo $ID_S3_TARGET_VALUE
-echo $ID_S3_TARGET 
 # Get export folder name for path syncing to S3
 NUMERO_LOT=$(python get_last_target_folder_id.py)
 # Give right path for export storage
