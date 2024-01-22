@@ -19,7 +19,7 @@ if [ -n "$files" ]; then
                 mc cp --recursive "$SOURCE_PATH$filename" ./
 
                 # Get export folder name for annotated data before creation
-                NUMERO_LOT=$(python get_last_target_folder_id.py)
+                NUMERO_LOT=$(python display_last_target_folder_id.py)
                 # Copy in an other folder, tasks done in the current batch before creation of new LS project (avoid sync problem)
                 mc cp --recursive "s3/$S3_BUCKET$S3_BUCKET_PREFIX_ANNOTATION_TARGET/Lot $NUMERO_LOT/" "s3/$S3_BUCKET$S3_BUCKET_PREFIX_ANNOTATION_TARGET/Lot $NUMERO_LOT termine"
                 
@@ -27,7 +27,7 @@ if [ -n "$files" ]; then
                 python update_create_project.py
 
                 # Get current export folder name for annotated data after creation
-                NUMERO_LOT=$(python get_current_target_folder_id.py)
+                NUMERO_LOT=$(python display_current_target_folder_id.py)
                 # Get current project id 
                 LABEL_STUDIO_PROJECT_ID=$(python count_project_id.py)
                 # Export as env variable
@@ -70,7 +70,7 @@ export LABEL_STUDIO_PROJECT_ID=$LABEL_STUDIO_PROJECT_ID
 # Check current project id (according to label studio)
 echo CURRENT LABEL STUDIO ID PROJET: $LABEL_STUDIO_PROJECT_ID
 # Get export folder name for path syncing to S3
-NUMERO_LOT=$(python get_last_target_folder_id.py)
+NUMERO_LOT=$(python display_last_target_folder_id.py)
 # Give right path for export storage
 TARGET_PATH="$S3_BUCKET_PREFIX_ANNOTATION_TARGET/Lot $NUMERO_LOT"
 # sync export storage with s3

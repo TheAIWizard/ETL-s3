@@ -29,6 +29,3 @@ def get_highest_integer_from_folders():
     highest_integer = max(integers, default=None)
     # Depending on the folders already present, give the most convinient integer
     return highest_integer if highest_integer is not None else 0
-
-
-print(get_highest_integer_from_folders())

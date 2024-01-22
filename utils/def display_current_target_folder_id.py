@@ -1,0 +1,3 @@
+from get_current_target_folder_id import get_current_target_folder
+
+print(get_current_target_folder())
