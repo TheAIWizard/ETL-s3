@@ -30,7 +30,14 @@ if [ -n "$files" ]; then
                 NUMERO_LOT=$(python display_current_target_folder_id.py)
                 echo "Folder to sync: Lot $NUMERO_LOT"
                 # Create export folder to avoid unnecessary bugs if it works without this
-                mc cp /dev/null "s3$S3_BUCKET/$S3_BUCKET_PREFIX_ANNOTATION_TARGET/Lot $NUMERO_LOT/"
+                # Create an empty file (placeholder)
+                echo "" > placeholder.txt
+                # Upload the empty file to MinIO
+                mc cp placeholder.txt "s3$S3_BUCKET/$S3_BUCKET_PREFIX_ANNOTATION_TARGET/Lot $NUMERO_LOT/"
+                # Remove the placeholder file from MinIO
+                mc rm "s3$S3_BUCKET/$S3_BUCKET_PREFIX_ANNOTATION_TARGET/Lot $NUMERO_LOT/placeholder.txt"
+                # Optional: Remove the local placeholder file
+                rm placeholder.txt
 
                 # Get current project id 
                 LABEL_STUDIO_PROJECT_ID=$(python count_project_id.py)
@@ -80,4 +87,3 @@ echo "Folder to sync: Lot $NUMERO_LOT"
 TARGET_PATH="$S3_BUCKET_PREFIX_ANNOTATION_TARGET/Lot $NUMERO_LOT"
 # sync export storage with s3
 python s3_sync_target.py $ID_S3_TARGET "$TARGET_PATH"
-mc cp /dev/null "$S3_BUCKET_PREFIX_ANNOTATION_TARGET/create test"
