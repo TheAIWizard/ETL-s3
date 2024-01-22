@@ -70,7 +70,7 @@ export LABEL_STUDIO_PROJECT_ID=$LABEL_STUDIO_PROJECT_ID
 # Check current project id (according to label studio)
 echo CURRENT LABEL STUDIO ID PROJET: $LABEL_STUDIO_PROJECT_ID
 # Get export folder name for path syncing to S3
-NUMERO_LOT=$(python display_last_target_folder_id.py)
+NUMERO_LOT=$(python display_current_target_folder_id.py)
 # Give right path for export storage
 TARGET_PATH="$S3_BUCKET_PREFIX_ANNOTATION_TARGET/Lot $NUMERO_LOT"
 # sync export storage with s3
