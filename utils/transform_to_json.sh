@@ -29,6 +29,9 @@ if [ -n "$files" ]; then
                 # Get current export folder name for annotated data after creation
                 NUMERO_LOT=$(python display_current_target_folder_id.py)
                 echo "Folder to sync: Lot $NUMERO_LOT"
+                # Create export folder to avoid unnecessary bugs if it works without this
+                mc cp /dev/null "s3/$S3_BUCKET/$S3_BUCKET_PREFIX_ANNOTATION_TARGET/Lot $NUMERO_LOT/"
+
                 # Get current project id 
                 LABEL_STUDIO_PROJECT_ID=$(python count_project_id.py)
                 # Export as env variable
