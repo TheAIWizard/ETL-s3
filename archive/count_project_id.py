@@ -43,6 +43,7 @@ def get_last_pk():
     if response_get.status_code == 200:
         response_json_data = response_get.json()
         last_project_id = response_json_data['results'][0]['id'] if response_json_data['results'] else print("No existing project to update") # last label studio project id created
+        print(last_project_id)
         return last_project_id
     else:
         print(f"Error: {response_get.status_code}")

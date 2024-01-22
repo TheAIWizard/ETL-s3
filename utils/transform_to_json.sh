@@ -25,6 +25,8 @@ if [ -n "$files" ]; then
                 NUMERO_LOT=$(python get_last_target_folder_id.py)
                 # Get current project id 
                 LABEL_STUDIO_PROJECT_ID=$(python get_last_target_folder_id.py)
+                # Export as env variable
+                export LABEL_STUDIO_PROJECT_ID=$LABEL_STUDIO_PROJECT_ID
                 # Check current project id (according to label studio)
                 echo CURRENT LABEL STUDIO ID PROJET: $LABEL_STUDIO_PROJECT_ID
 
