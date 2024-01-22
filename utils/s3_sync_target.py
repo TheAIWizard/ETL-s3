@@ -56,5 +56,5 @@ def sync_api_s3(id_s3, prefix):
 id_s3 = str(sys.argv[1])
 s3_target_path = str(sys.argv[2])
 numero_lot = get_highest_integer_from_folders()
-sync_api_s3(id_s3, s3_target_path + f"/Lot {numero_lot}")
+sync_api_s3(id_s3, s3_target_path)
 print("Folder to sync: "+f"Lot {numero_lot}")
