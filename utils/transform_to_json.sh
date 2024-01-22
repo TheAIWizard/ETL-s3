@@ -23,9 +23,11 @@ if [ -n "$files" ]; then
                 # Copy in an other folder, tasks done in the current batch before creation of new LS project (avoid sync problem)
                 mc cp --recursive "s3/$S3_BUCKET$S3_BUCKET_PREFIX_ANNOTATION_TARGET/Lot $NUMERO_LOT/" "s3/$S3_BUCKET$S3_BUCKET_PREFIX_ANNOTATION_TARGET/Lot $NUMERO_LOT termine"
                 
-                # Create or update/create label studio project and get current export folder name id for annotated data after creation
-                NUMERO_LOT=$(python update_create_project.py)
+                # Create or update/create label studio project
+                python update_create_project.py
 
+                # Get current export folder name for annotated data after creation
+                NUMERO_LOT=$(python get_current_target_folder_id.py)
                 # Get current project id 
                 LABEL_STUDIO_PROJECT_ID=$(python count_project_id.py)
                 # Export as env variable

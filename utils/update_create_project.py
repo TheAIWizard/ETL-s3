@@ -157,12 +157,8 @@ def update_project():
 if previous_count <= 0:
     # create first project
     create_project()
-    # print next numero lot
-    print(get_highest_integer_from_folders()+1)
 else:
     # archive current project and create new project
     update_project()
     # store current id of newly created project
     create_project()
-    # print next numero lot
-    print(get_highest_integer_from_folders()+1)
