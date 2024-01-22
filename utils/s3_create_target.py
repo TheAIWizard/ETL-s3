@@ -2,7 +2,7 @@ import sys
 import os
 import json
 import requests
-from count_project_id import count_projects
+from count_project_id import get_last_pk
 
 
 def create_connection_api_s3(prefix):
@@ -14,7 +14,7 @@ def create_connection_api_s3(prefix):
     # change to S3_ENDPOINT_URL if different python image
     s3_endpoint = os.environ.get("S3_ENDPOINT")
     service_endpoint = os.getenv("LABEL_STUDIO_SERVICE_ENDPOINT")
-    project = str(count_projects()) # os.getenv("LABEL_STUDIO_PROJECT_ID")
+    project = str(get_last_pk()) # os.getenv("LABEL_STUDIO_PROJECT_ID")
     authorization_token = os.getenv("LABEL_STUDIO_TOKEN")
     # headers
     headers = {

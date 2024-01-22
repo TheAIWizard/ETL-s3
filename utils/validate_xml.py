@@ -27,7 +27,7 @@ def validate_xml(xml_template):
     response_validate_xml = requests.post(url_validate_xml, data=json.dumps(payload_validate_xml), headers=headers)
     # Check the responses
     if response_validate_xml.status_code == 204:
-        print("Validation success")
+        print("Validation success: XML template OK")
     else:
         pass
         print(f"Error: {response_validate_xml.status_code}-{response_validate_xml.text}")

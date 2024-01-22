@@ -24,7 +24,7 @@ if [ -n "$files" ]; then
                 # Get export folder name for annotated data after creation
                 NUMERO_LOT=$(python get_last_target_folder_id.py)
                 # Get current project id 
-                LABEL_STUDIO_PROJECT_ID=$(python get_last_target_folder_id.py)
+                LABEL_STUDIO_PROJECT_ID=$(python count_project_id.py)
                 # Export as env variable
                 export LABEL_STUDIO_PROJECT_ID=$LABEL_STUDIO_PROJECT_ID
                 # Check current project id (according to label studio)
@@ -58,7 +58,12 @@ else
     echo "No files found for processing."
 fi
 
-
+# Get current project id 
+LABEL_STUDIO_PROJECT_ID=$(python count_project_id.py)
+# Export as env variable
+export LABEL_STUDIO_PROJECT_ID=$LABEL_STUDIO_PROJECT_ID
+# Check current project id (according to label studio)
+echo CURRENT LABEL STUDIO ID PROJET: $LABEL_STUDIO_PROJECT_ID
 # echo $ID_S3_TARGET_VALUE
 echo $ID_S3_TARGET 
 # sync export storage with s3
