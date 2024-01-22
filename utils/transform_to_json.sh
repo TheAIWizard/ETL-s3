@@ -76,4 +76,4 @@ NUMERO_LOT=$(python get_last_target_folder_id.py)
 # Give right path for export storage
 TARGET_PATH="$S3_BUCKET_PREFIX_ANNOTATION_TARGET/Lot $NUMERO_LOT"
 # sync export storage with s3
-python s3_sync_target.py $ID_S3_TARGET "$TARGET_PATH"
+python s3_sync_target.py $ID_S3_TARGET "$TARGET_PATH/"
