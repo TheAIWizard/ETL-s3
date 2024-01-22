@@ -3,6 +3,7 @@ import os
 import json
 import requests
 from count_project_id import get_last_pk
+from get_last_target_folder_id import get_highest_integer_from_folders
 
 
 def sync_api_s3(id_s3, prefix):
@@ -24,8 +25,8 @@ def sync_api_s3(id_s3, prefix):
 
     # Sync s3 storage for annotation source
     payload_sync_s3 = {
-        "title": "Your Title test",
-        "description": "Your Description test",
+        "title": f"Stockage sur S3 du {get_highest_integer_from_folders()}ème lot annoté",
+        "description": "Synchronisation de la connexion de Label Studio au bucket S3 pour persister les données annotées",
         "can_delete_objects": True,
         "bucket": bucket,
         "prefix": prefix,
@@ -54,6 +55,6 @@ def sync_api_s3(id_s3, prefix):
 
 id_s3 = str(sys.argv[1])
 s3_target_path = str(sys.argv[2])
-numero_lot = count_projects()+1
+numero_lot = get_highest_integer_from_folders()
 sync_api_s3(id_s3, s3_target_path + f"/Lot {numero_lot}")
-print(f"Project count : {count_projects()}")
+print("Folder to sync: "+f"/Lot {numero_lot}")

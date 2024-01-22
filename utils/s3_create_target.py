@@ -3,6 +3,7 @@ import os
 import json
 import requests
 from count_project_id import get_last_pk
+from get_last_target_folder_id import get_highest_integer_from_folders
 
 
 def create_connection_api_s3(prefix):
@@ -26,8 +27,8 @@ def create_connection_api_s3(prefix):
     url_create_s3 = f"{service_endpoint}/api/storages/export/s3"
     payload_create_s3 = {
         "presign": True,
-        "title": "Your Title test source",
-        "description": "Your Description test source",
+        "title": f"Stockage sur S3 du {get_highest_integer_from_folders()}ème lot annoté",
+        "description": "Création de la connexion de Label Studio au bucket S3 pour persister les données annotées",
         "last_sync_count": 0,
         "bucket": bucket,
         "prefix": prefix,

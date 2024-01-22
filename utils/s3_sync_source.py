@@ -25,8 +25,8 @@ def sync_api_s3(prefix):
     url_create_s3 = f"{service_endpoint}/api/storages/s3"
     payload_create_s3 = {
         "presign": True,
-        "title": "Your Title test source",
-        "description": "Your Description test source",
+        "title": "Chargement sur S3 des données à annoter",
+        "description": "Création de la connexion de Label Studio au bucket S3 pour charger les données à annoter",
         "last_sync_count": 0,
         "bucket": bucket,
         "prefix": prefix,
@@ -44,8 +44,8 @@ def sync_api_s3(prefix):
     # Sync s3 storage for annotation source
     payload_sync_s3 = {
         "presign": True,
-        "title": "Your Title test",
-        "description": "Your Description test",
+        "title": "Chargement sur S3 des données à annoter",
+        "description": "Synchronisation de la connexion de Label Studio au bucket S3 pour charger les données à annoter",
         "last_sync_count": 0,
         "can_delete_objects": True,
         "bucket": bucket,
