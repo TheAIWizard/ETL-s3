@@ -21,7 +21,7 @@ if [ -n "$files" ]; then
                 # Get export folder name for annotated data before creation
                 NUMERO_LOT=$(python get_last_target_folder_id.py)
                 # Copy in an other folder, tasks done in the current batch before creation of new LS project (avoid sync problem)
-                mc cp --recursive "$S3_BUCKET_PREFIX_ANNOTATION_TARGET/Lot $NUMERO_LOT" "$S3_BUCKET_PREFIX_ANNOTATION_TARGET/Lot $NUMERO_LOT termine"
+                mc cp --recursive "s3/$S3_BUCKET$S3_BUCKET_PREFIX_ANNOTATION_TARGET/Lot $NUMERO_LOT" "s3/$S3_BUCKET$S3_BUCKET_PREFIX_ANNOTATION_TARGET/Lot $NUMERO_LOT termine"
                 
                 # Create or update/create label studio project
                 python update_create_project.py
