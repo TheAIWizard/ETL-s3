@@ -47,5 +47,3 @@ def get_last_pk():
         return last_project_id
     else:
         print(f"Error: {response_get.status_code}")
-
-print(get_last_pk())

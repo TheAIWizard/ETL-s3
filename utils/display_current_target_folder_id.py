@@ -6,6 +6,6 @@ if get_folders_number_in_prefix()-count_projects() > 1:
 if get_folders_number_in_prefix()-count_projects() == 1:
     print(get_highest_integer_from_folders())
 if get_folders_number_in_prefix()-count_projects() == 0:
-    print(get_highest_integer_from_folders())
+    print(get_highest_integer_from_folders()+1)
 if get_folders_number_in_prefix()-count_projects() < 0:
     print("Missing lot files")

@@ -31,7 +31,7 @@ if [ -n "$files" ]; then
                 echo "Folder to sync: Lot $NUMERO_LOT"
 
                 # Get current project id 
-                LABEL_STUDIO_PROJECT_ID=$(python count_project_id.py)
+                LABEL_STUDIO_PROJECT_ID=$(python display_last_pk.py)
                 # Export as env variable
                 export LABEL_STUDIO_PROJECT_ID=$LABEL_STUDIO_PROJECT_ID
                 # Check current project id (according to label studio)
@@ -66,7 +66,7 @@ else
 fi
 
 # Get current project id 
-LABEL_STUDIO_PROJECT_ID=$(python count_project_id.py)
+LABEL_STUDIO_PROJECT_ID=$(python display_last_pk.py)
 # Export as env variable
 export LABEL_STUDIO_PROJECT_ID=$LABEL_STUDIO_PROJECT_ID
 # Check current project id (according to label studio)
