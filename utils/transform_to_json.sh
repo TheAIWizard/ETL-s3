@@ -75,7 +75,7 @@ echo CURRENT LABEL STUDIO ID PROJET: $LABEL_STUDIO_PROJECT_ID
 NUMERO_LOT=$(python display_current_target_folder_id.py)
 # Export folder path
 TARGET_PATH="$S3_BUCKET_PREFIX_ANNOTATION_TARGET/Lot $NUMERO_LOT"
-# Check if it's empty'
+# Check if it's empty
 if mc ls "s3/$S3_BUCKET$TARGET_PATH" | grep STANDARD; then
     echo "Lot $NUMERO_LOT se remplit"
     NUMERO_LOT=$(python display_last_target_folder_id.py)
