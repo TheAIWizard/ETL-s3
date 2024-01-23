@@ -73,6 +73,16 @@ export LABEL_STUDIO_PROJECT_ID=$LABEL_STUDIO_PROJECT_ID
 echo CURRENT LABEL STUDIO ID PROJET: $LABEL_STUDIO_PROJECT_ID
 # Get export folder name for path syncing to S3
 NUMERO_LOT=$(python display_current_target_folder_id.py)
+# Export folder path
+TARGET_PATH="$S3_BUCKET_PREFIX_ANNOTATION_TARGET/Lot $NUMERO_LOT"
+# Check if it contains json files
+if mc ls "$TARGET_PATH"; then
+    echo "Lot $NUMERO_LOT est encore vide"
+    NUMERO_LOT=$(python display_current_target_folder_id.py)
+else
+    echo "Lot $NUMERO_LOT se remplit"
+    NUMERO_LOT=$(python display_last_target_folder_id.py)
+fi
 echo "Folder to sync: Lot $NUMERO_LOT"
 # Give right path for export storage
 TARGET_PATH="$S3_BUCKET_PREFIX_ANNOTATION_TARGET/Lot $NUMERO_LOT"
