@@ -29,3 +29,17 @@ def get_highest_integer_from_folders():
     highest_integer = max(integers, default=None)
     # Depending on the folders already present, give the most convinient integer
     return highest_integer if highest_integer is not None else 0
+
+
+def get_folders_number_in_prefix():
+    # Replace 'your-bucket-name' with the actual name of your S3 bucket
+    bucket_name = os.getenv("S3_BUCKET")
+    # Specify the prefix of the folder of the export storage
+    prefix = os.getenv("S3_BUCKET_PREFIX_ANNOTATION_TARGET")
+
+# Get the list of folders in the specified prefix of the bucket
+    folder_list = list_folders_in_prefix(bucket_name, prefix)
+    # Extract integers from folder names and find the maximum
+    integers = [int(folder.split()[-1]) for folder in folder_list if folder.split()[-1].isdigit()]
+    # Depending on the folders already present, give its number
+    return len(integers)
