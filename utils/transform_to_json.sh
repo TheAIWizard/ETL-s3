@@ -65,17 +65,17 @@ else
     echo "No files found for processing."
 fi
 
-# # Get current project id 
-# LABEL_STUDIO_PROJECT_ID=$(python count_project_id.py)
-# # Export as env variable
-# export LABEL_STUDIO_PROJECT_ID=$LABEL_STUDIO_PROJECT_ID
-# # Check current project id (according to label studio)
-# echo CURRENT LABEL STUDIO ID PROJET: $LABEL_STUDIO_PROJECT_ID
-# # Get export folder name for path syncing to S3
-# NUMERO_LOT=$(python display_last_target_folder_id.py)
-# echo "Folder to sync: Lot $NUMERO_LOT"
-# # Give right path for export storage
-# TARGET_PATH="$S3_BUCKET_PREFIX_ANNOTATION_TARGET/Lot $NUMERO_LOT"
-# # sync export storage with s3
-# python s3_sync_target.py $ID_S3_TARGET "$TARGET_PATH"
+# Get current project id 
+LABEL_STUDIO_PROJECT_ID=$(python count_project_id.py)
+# Export as env variable
+export LABEL_STUDIO_PROJECT_ID=$LABEL_STUDIO_PROJECT_ID
+# Check current project id (according to label studio)
+echo CURRENT LABEL STUDIO ID PROJET: $LABEL_STUDIO_PROJECT_ID
+# Get export folder name for path syncing to S3
+NUMERO_LOT=$(python display_last_target_folder_id.py)
+echo "Folder to sync: Lot $NUMERO_LOT"
+# Give right path for export storage
+TARGET_PATH="$S3_BUCKET_PREFIX_ANNOTATION_TARGET/Lot $NUMERO_LOT"
+# sync export storage with s3
+python s3_sync_target.py $ID_S3_TARGET "$TARGET_PATH"
 
