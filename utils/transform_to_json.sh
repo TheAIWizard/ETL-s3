@@ -29,6 +29,13 @@ if [ -n "$files" ]; then
                 # Get current export folder name for annotated data after creation
                 NUMERO_LOT=$(python display_current_target_folder_id.py)
                 echo "Folder to sync: Lot $NUMERO_LOT"
+                # Create export folder to avoid unnecessary bugs if it works without this
+                # Create an empty file (placeholder)
+                echo "" > placeholder.txt
+                # Upload the empty file to MinIO
+                mc cp placeholder.txt "s3/$S3_BUCKET$S3_BUCKET_PREFIX_ANNOTATION_TARGET/Lot $NUMERO_LOT/"
+                # Optional: Remove the local placeholder file
+                rm placeholder.txt
 
                 # Get current project id 
                 LABEL_STUDIO_PROJECT_ID=$(python count_project_id.py)
@@ -78,4 +85,11 @@ echo "Folder to sync: Lot $NUMERO_LOT"
 TARGET_PATH="$S3_BUCKET_PREFIX_ANNOTATION_TARGET/Lot $NUMERO_LOT"
 # sync export storage with s3
 python s3_sync_target.py $ID_S3_TARGET "$TARGET_PATH"
-
+# Check if the placeholder file exists in MinIO
+if mc ls "s3/$S3_BUCKET$S3_BUCKET_PREFIX_ANNOTATION_TARGET/Lot $NUMERO_LOT/placeholder.txt"; then
+    # Remove the placeholder file from MinIO
+    mc rm "s3/$S3_BUCKET$S3_BUCKET_PREFIX_ANNOTATION_TARGET/Lot $NUMERO_LOT/placeholder.txt"
+    echo "Placeholder file removed from MinIO."
+else
+    echo "Placeholder file does not exist in MinIO. No removal needed."
+fi
