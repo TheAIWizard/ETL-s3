@@ -1,5 +1,5 @@
 #!/bin/bash
-set -x
+#set -x
 
 SOURCE_PATH="s3/$S3_BUCKET/$S3_BUCKET_PREFIX_DEPOT_MANUEL"
 ARCHIVE_PATH="s3/$S3_BUCKET/$S3_BUCKET_PREFIX_ARCHIVE_DEPOT_MANUEL"
@@ -77,7 +77,7 @@ NUMERO_LOT=$(python display_last_target_folder_id.py)
 TARGET_PATH="$S3_BUCKET_PREFIX_ANNOTATION_TARGET/Lot $NUMERO_LOT"
 # Check if previous batch is full and assign next target storage
 if mc ls "s3/$S3_BUCKET$TARGET_PATH termine" | grep STANDARD; then
-    echo "Lot $NUMERO_LOT est terminé --> Archivage du lot précédent --> Passage au lot suivant pour l'annotation"
+    echo "Lot $NUMERO_LOT est terminé --> Archivage du lot précédent --> Passage au lot suivant pour annotation"
     NUMERO_LOT=$(python display_current_target_folder_id.py)
 else
     echo "Lot $NUMERO_LOT toujours en cours d'annotation"
