@@ -62,7 +62,7 @@ if [ -n "$files" ]; then
         esac
     done
 else
-    echo "No files found for processing."
+    echo "No files found for annotation"
 fi
 
 # Get current project id 
