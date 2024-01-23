@@ -72,16 +72,16 @@ export LABEL_STUDIO_PROJECT_ID=$LABEL_STUDIO_PROJECT_ID
 # Check current project id (according to label studio)
 echo CURRENT LABEL STUDIO ID PROJET: $LABEL_STUDIO_PROJECT_ID
 # Get export folder name for path syncing to S3
-NUMERO_LOT=$(python display_current_target_folder_id.py)
+NUMERO_LOT=$(python display_last_target_folder_id.py)
 # Export folder path
 TARGET_PATH="$S3_BUCKET_PREFIX_ANNOTATION_TARGET/Lot $NUMERO_LOT"
-# Check if it's empty
-if mc ls "s3/$S3_BUCKET$TARGET_PATH" | grep STANDARD; then
-    echo "Lot $NUMERO_LOT se remplit"
-    NUMERO_LOT=$(python display_last_target_folder_id.py)
-else
-    echo "Lot $NUMERO_LOT est encore vide"
+# Check if previous batch is full and assign next target storage
+if mc ls "s3/$S3_BUCKET$TARGET_PATH termine" | grep STANDARD; then
+    echo "Lot $NUMERO_LOT est terminé --> Archivage du lot précédent --> Passage au lot suivant pour l'annotation"
     NUMERO_LOT=$(python display_current_target_folder_id.py)
+else
+    echo "Lot $NUMERO_LOT toujours en cours d'annotation"
+    NUMERO_LOT=$(python display_last_target_folder_id.py)
 fi
 echo "Folder to sync: Lot $NUMERO_LOT"
 # Give right path for export storage
