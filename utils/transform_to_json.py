@@ -48,11 +48,15 @@ def save_to_s3(data, bucket: str, path: str, file_path: str):
 
 def format_data(data_df):
     with open('correspondance_intitule_nature_activite.json', 'r') as file:
-        correspondance_tableau = json.load(file)
+        correspondance_tableau_nature_activite = json.load(file)
+    with open('correspondance_intitule_cj', 'r') as file:
+        correspondance_tableau_cj = json.load(file)
     # Convert Timestamp objects to strings
     data_df['date_modification'] = data_df['date_modification'].astype(str)
     # Map activ_nat_et with its heading
-    data_df['activ_nat_et_intitule'] = data_df['activ_nat_et'].map(correspondance_tableau)
+    data_df['activ_nat_et_intitule'] = data_df['activ_nat_et'].map(correspondance_tableau_nature_activite)
+    # Map cj with its heading
+    data_df['cj_intitule'] = data_df['cj'].map(correspondance_tableau_cj)
     # Replace NaN values with empty strings
     data_df = data_df.fillna("")
     return data_df
