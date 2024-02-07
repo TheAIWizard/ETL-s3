@@ -49,7 +49,7 @@ def save_to_s3(data, bucket: str, path: str, file_path: str):
 def format_data(data_df):
     with open('correspondance_intitule_nature_activite.json', 'r') as file:
         correspondance_tableau_nature_activite = json.load(file)
-    with open('correspondance_intitule_cj', 'r') as file:
+    with open('correspondance_intitule_cj.json', 'r') as file:
         correspondance_tableau_cj = json.load(file)
     # Convert Timestamp objects to strings
     data_df['date_modification'] = data_df['date_modification'].astype(str)
