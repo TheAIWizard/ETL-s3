@@ -85,7 +85,7 @@ def transform_to_json(input_file_path):
     return data_list
 
 
-def main(bucket: str, path_json: str, path_source: str, input_file_path: str):
+def main(bucket: str, path_source: str, input_file_path: str):
     data = transform_to_json(input_file_path)
     # save converted json to bucket
     # save_to_s3(data, bucket, path_json, os.path.splitext(input_file_path)[0] + '.json')
