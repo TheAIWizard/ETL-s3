@@ -42,9 +42,9 @@ def save_to_s3(data, bucket: str, path: str, file_path: str):
         secret=os.getenv("AWS_SECRET_ACCESS_KEY"),
     )
     json_str = json.dumps(data, indent=4, ensure_ascii=False)
-    with fs.open(f'{bucket}/{path}{current_date}-{file_path}', 'w') as f:
+    with fs.open(f'{bucket}/{path}{current_date}-{file_path}', 'w', encoding='utf-8') as f:
         # Save the data as JSON
-        f.write(json_str.encode('utf-8'))
+        f.write(json_str)
 
 
 def format_data(data_df):
