@@ -88,4 +88,6 @@ echo "Folder to sync: batch-$NUMERO_LOT"
 TARGET_PATH="$S3_BUCKET_PREFIX_ANNOTATION_TARGET/in-progress/batch-$NUMERO_LOT"
 # sync export storage with s3
 python s3_sync_target.py $ID_S3_TARGET "$TARGET_PATH"
+# check xml template for UI validation in Label Studio
+python validate_xml.py
 

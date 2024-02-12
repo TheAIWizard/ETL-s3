@@ -40,8 +40,8 @@ def get_week_info_french(date=None):
 
 
 def count_projects():
-    service_endpoint = os.getenv("LABEL_STUDIO_SERVICE_ENDPOINT")
-    authorization_token = os.getenv("LABEL_STUDIO_TOKEN")
+    service_endpoint = "https://projet-ape-851712.user.lab.sspcloud.fr"
+    authorization_token = ""
     # headers
     headers = {
         "Content-Type": "application/json",
@@ -72,8 +72,8 @@ with open("taxonomy.xml", 'r', encoding='utf-8') as file:
 
 
 def create_project():
-    service_endpoint = os.getenv("LABEL_STUDIO_SERVICE_ENDPOINT")
-    authorization_token = os.getenv("LABEL_STUDIO_TOKEN")
+    service_endpoint = "https://projet-ape-851712.user.lab.sspcloud.fr"
+    authorization_token = ""
     # headers
     headers = {
         "Content-Type": "application/json",
@@ -169,5 +169,5 @@ if previous_count <= 0:
 # create first project
     create_project()
 # archive current project and create new project 
-update_project()
+#update_project()
 create_project()
