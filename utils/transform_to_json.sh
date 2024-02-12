@@ -77,10 +77,10 @@ NUMERO_LOT=$(python display_last_target_folder_id.py)
 TARGET_PATH="$S3_BUCKET_PREFIX_ANNOTATION_TARGET/completed/batch-$NUMERO_LOT"
 # Check if previous batch is full and assign next target storage
 if mc ls "s3/$S3_BUCKET$TARGET_PATH" | grep STANDARD; then
-    echo "batch-$NUMERO_LOT est terminé --> Archivage du lot précédent --> Passage au lot suivant pour annotation"
+    echo "Batch $NUMERO_LOT is completed --> Archiving of the previous batch --> Moving to the next batch for annotation."
     NUMERO_LOT=$(python display_current_target_folder_id.py)
 else
-    echo "batch-$NUMERO_LOT toujours en cours d'annotation"
+    echo "Batch $NUMERO_LOT still undergoing annotation in Label Studio"
     NUMERO_LOT=$(python display_last_target_folder_id.py)
 fi
 echo "Folder to sync: batch-$NUMERO_LOT"
