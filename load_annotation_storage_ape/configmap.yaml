@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: label-studio-config-projet-ape
+  name: configmap-label-studio
   namespace: projet-ape
 data:
   namespace: projet-ape
