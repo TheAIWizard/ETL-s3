@@ -11,7 +11,7 @@ def list_folders_in_prefix(bucket_name, prefix):
     )
 
     # List objects in the specified prefix
-    objects = s3.ls(f'{bucket_name}{prefix}')
+    objects = s3.ls(f'{bucket_name}{prefix}/in-progress')
 
     return objects
 
