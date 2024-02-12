@@ -43,7 +43,7 @@ spec:
               mountPath: "/tmp"
             envFrom:
             - configMapRef:
-                    name: label-studio-config-projet-ape
+                    name: configmap
             env:
             # from secrets
             - name: LABEL_STUDIO_TOKEN

@@ -21,14 +21,14 @@ if [ -n "$files" ]; then
                 # Get export folder name for annotated data before creation
                 NUMERO_LOT=$(python display_last_target_folder_id.py)
                 # Copy in an other folder, tasks done in the current batch before creation of new LS project (avoid sync problem)
-                mc cp --recursive "s3/$S3_BUCKET$S3_BUCKET_PREFIX_ANNOTATION_TARGET/Lot $NUMERO_LOT/" "s3/$S3_BUCKET$S3_BUCKET_PREFIX_ANNOTATION_TARGET/Lot $NUMERO_LOT termine"
+                mc cp --recursive "s3/$S3_BUCKET$S3_BUCKET_PREFIX_ANNOTATION_TARGET/data/batch-$NUMERO_LOT/" "s3/$S3_BUCKET$S3_BUCKET_PREFIX_ANNOTATION_TARGET/data_labeled/batch-$NUMERO_LOT"
                 
                 # Create or update/create label studio project
                 python update_create_project.py
 
                 # Get current export folder name for annotated data after creation
                 NUMERO_LOT=$(python display_current_target_folder_id.py)
-                echo "Folder to sync: Lot $NUMERO_LOT"
+                echo "Folder to sync: batch-$NUMERO_LOT"
 
                 # Get current project id 
                 LABEL_STUDIO_PROJECT_ID=$(python display_last_pk.py)
@@ -41,7 +41,7 @@ if [ -n "$files" ]; then
                 python transform_to_json.py "$filename"
 
                 # Give right path for export storage
-                TARGET_PATH="$S3_BUCKET_PREFIX_ANNOTATION_TARGET/Lot $NUMERO_LOT"
+                TARGET_PATH="$S3_BUCKET_PREFIX_ANNOTATION_TARGET/batch-$NUMERO_LOT"
                 echo "TARGET_PATH is set to: $TARGET_PATH"
 
                 # Create target S3 
@@ -74,18 +74,18 @@ echo CURRENT LABEL STUDIO ID PROJET: $LABEL_STUDIO_PROJECT_ID
 # Get export folder name for path syncing to S3
 NUMERO_LOT=$(python display_last_target_folder_id.py)
 # Export folder path
-TARGET_PATH="$S3_BUCKET_PREFIX_ANNOTATION_TARGET/Lot $NUMERO_LOT"
+TARGET_PATH="$S3_BUCKET_PREFIX_ANNOTATION_TARGET/data_labeled/batch-$NUMERO_LOT"
 # Check if previous batch is full and assign next target storage
-if mc ls "s3/$S3_BUCKET$TARGET_PATH termine" | grep STANDARD; then
-    echo "Lot $NUMERO_LOT est terminé --> Archivage du lot précédent --> Passage au lot suivant pour annotation"
+if mc ls "s3/$S3_BUCKET$TARGET_PATH" | grep STANDARD; then
+    echo "batch-$NUMERO_LOT est terminé --> Archivage du lot précédent --> Passage au lot suivant pour annotation"
     NUMERO_LOT=$(python display_current_target_folder_id.py)
 else
-    echo "Lot $NUMERO_LOT toujours en cours d'annotation"
+    echo "batch-$NUMERO_LOT toujours en cours d'annotation"
     NUMERO_LOT=$(python display_last_target_folder_id.py)
 fi
-echo "Folder to sync: Lot $NUMERO_LOT"
+echo "Folder to sync: batch-$NUMERO_LOT"
 # Give right path for export storage
-TARGET_PATH="$S3_BUCKET_PREFIX_ANNOTATION_TARGET/Lot $NUMERO_LOT"
+TARGET_PATH="$S3_BUCKET_PREFIX_ANNOTATION_TARGET/batch-$NUMERO_LOT"
 # sync export storage with s3
 python s3_sync_target.py $ID_S3_TARGET "$TARGET_PATH"
 

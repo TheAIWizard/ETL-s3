@@ -41,9 +41,10 @@ def save_to_s3(data, bucket: str, path: str, file_path: str):
         key=os.getenv("AWS_ACCESS_KEY_ID"),
         secret=os.getenv("AWS_SECRET_ACCESS_KEY"),
     )
+    json_str = json.dumps(data, indent=4, ensure_ascii=False)
     with fs.open(f'{bucket}/{path}{current_date}-{file_path}', 'w') as f:
         # Save the data as JSON
-        json.dump(data, f, indent=2)
+        f.write(json_str.encode('utf-8'))
 
 
 def format_data(data_df):
@@ -87,11 +88,12 @@ def transform_to_json(input_file_path):
 def main(bucket: str, path_json: str, path_source: str, input_file_path: str):
     data = transform_to_json(input_file_path)
     # save converted json to bucket
-    save_to_s3(data, bucket, path_json, os.path.splitext(input_file_path)[0] + '.json')
+    # save_to_s3(data, bucket, path_json, os.path.splitext(input_file_path)[0] + '.json')
     # split and save json to data source bucket for label studio annotation
     split_and_save_to_s3(data, bucket, path_source, os.path.splitext(input_file_path)[0])
 
 
 if __name__ == "__main__":
     input_file_path = str(sys.argv[1])
-    main(os.getenv("S3_BUCKET"), os.getenv("S3_BUCKET_PREFIX_TRANSFORM_JSON"), os.getenv("S3_BUCKET_PREFIX_ANNOTATION_SOURCE"), input_file_path)
+    main(os.getenv("S3_BUCKET"), os.getenv("S3_BUCKET_PREFIX_ANNOTATION_SOURCE"), input_file_path)
+    # os.getenv("S3_BUCKET_PREFIX_TRANSFORM_JSON"),
