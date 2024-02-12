@@ -73,7 +73,7 @@ export LABEL_STUDIO_PROJECT_ID=$LABEL_STUDIO_PROJECT_ID
 echo CURRENT LABEL STUDIO ID PROJET: $LABEL_STUDIO_PROJECT_ID
 # Get export folder name for path syncing to S3
 NUMERO_LOT=$(python display_last_target_folder_id.py)
-echo mc ls s3/$S3_BUCKET$S3_BUCKET_PREFIX_ANNOTATION_TARGET/in-progress
+mc ls s3/$S3_BUCKET$S3_BUCKET_PREFIX_ANNOTATION_TARGET/in-progress
 # Export folder path
 TARGET_PATH="$S3_BUCKET_PREFIX_ANNOTATION_TARGET/completed/batch-$NUMERO_LOT"
 # Check if previous batch is full and assign next target storage
