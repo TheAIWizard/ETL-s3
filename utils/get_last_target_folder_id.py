@@ -28,7 +28,7 @@ def get_highest_integer_from_folders():
     integers = [int(folder.split()[-1]) for folder in folder_list if folder.split()[-1].isdigit()]
     highest_integer = max(integers, default=None)
     # Depending on the folders already present, give the most convinient integer
-    return highest_integer if highest_integer is not None else 0
+    return highest_integer if highest_integer is not None else integers
 
 
 def get_folders_number_in_prefix():
