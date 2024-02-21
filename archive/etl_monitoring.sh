@@ -1,0 +1,1 @@
+mc cp --recursive s3/projet-ape/label-studio/annotation-campaign-2024/NAF2008/data-annotated/completed/batch-2/ ./batch-2
