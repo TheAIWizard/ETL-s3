@@ -2,7 +2,7 @@
 *.csv
 *.json
 *update_project.py
-/archive/batch-2/
+archive/batch-2/
 
 !correspondance_intitule_nature_activite.json
 !correspondance_intitule_cj.json
