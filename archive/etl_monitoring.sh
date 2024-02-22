@@ -10,4 +10,4 @@ mc ls s3/$S3_BUCKET/$PATH_ANNOTATION_RESULTS | awk '{print "s3/'$S3_BUCKET'/'$PA
 python extract_test_data_monitoring.py $DATA_FILE_PATH_LOCAL $PATH_ANNOTATION_PREPROCESSED
 
 # Predict to send to dashboard
-python send_batch_dashboard.py $S3_BUCKET/$PATH_ANNOTATION_PREPROCESSED $S3_BUCKET/$PATH_ANNOTATION_DASHBOARD
+python send_batch_dashboard.py $S3_BUCKET/$PATH_ANNOTATION_PREPROCESSED $PATH_ANNOTATION_DASHBOARD

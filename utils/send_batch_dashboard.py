@@ -120,17 +120,7 @@ def main(data_file_path: str, dashboard_path:str) : #, date_to_log: str):
     # Remove 'date=' prefix from the 'date' column to partition again
     table['date'] = table['date'].str.replace('date=', '')
     arrow_table = pa.Table.from_pandas(table)
-    print(arrow_table)
     save_to_s3(arrow_table, "projet-ape", f"/{dashboard_path}/")
-    try:
-        pq.write_table(
-            arrow_table,
-            f"s3://projet-ape/{data_file_path}/test_data_NAF2008.parquet",
-            filesystem=fs
-        )
-        print("Data written to S3 successfully.")
-    except Exception as e:
-        print("Error writing data to S3:", e)
 
 
 if __name__ == "__main__":
