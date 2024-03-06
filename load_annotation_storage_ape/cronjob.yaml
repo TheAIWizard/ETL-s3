@@ -55,7 +55,7 @@ spec:
             - name: AWS_ACCESS_KEY_ID
               valueFrom:
                 secretKeyRef:
-                  name: my-s3-creds
+                  name: label-studio-254119-secrets3 
                   key: accessKey
             - name: AWS_SECRET_ACCESS_KEY
               valueFrom:
