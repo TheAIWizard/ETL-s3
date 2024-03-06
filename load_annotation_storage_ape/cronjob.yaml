@@ -55,12 +55,12 @@ spec:
             - name: AWS_ACCESS_KEY_ID
               valueFrom:
                 secretKeyRef:
-                  name: label-studio-254119-secrets3 
+                  name: s3-creds-service-account
                   key: accessKey
             - name: AWS_SECRET_ACCESS_KEY
               valueFrom:
                 secretKeyRef:
-                  name: label-studio-254119-secrets3 
+                  name: s3-creds-service-account
                   key: secretKey
           restartPolicy: Never
           serviceAccountName: send-batch-label-studio
