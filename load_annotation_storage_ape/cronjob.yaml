@@ -60,7 +60,7 @@ spec:
             - name: AWS_SECRET_ACCESS_KEY
               valueFrom:
                 secretKeyRef:
-                  name: my-s3-creds
+                  name: label-studio-254119-secrets3 
                   key: secretKey
           restartPolicy: Never
           serviceAccountName: send-batch-label-studio
