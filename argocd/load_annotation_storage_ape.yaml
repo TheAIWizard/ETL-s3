@@ -10,7 +10,7 @@ spec:
     path: load_annotation_storage_ape
   destination:
     server: https://kubernetes.default.svc
-    namespace: projet-ape
+    namespace: user-nrandriamanana
   syncPolicy:
     automated:
       selfHeal: true
