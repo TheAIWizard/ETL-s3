@@ -26,7 +26,7 @@ def get_highest_integer_from_folders():
     folder_list = list_folders_in_prefix(bucket_name, prefix)
     # Extract integers from folder names and find the maximum
     integers = [int(digit) for folder in folder_list for digit in folder[-3:] if digit.isdigit()]
-    highest_integer = max(integers, default=1)
+    highest_integer = max(integers, default=0)
     # Depending on the folders already present, give the most convinient integer
     return highest_integer
 
