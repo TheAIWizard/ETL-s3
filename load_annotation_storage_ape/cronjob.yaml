@@ -20,7 +20,7 @@ spec:
               - |
                 cd /tmp &&
                 wget https://raw.githubusercontent.com/TheAIWizard/custom-taxonomy-template/main/instructions.txt &&
-                wget https://raw.githubusercontent.com/TheAIWizard/custom-taxonomy-template/main/taxonomy.xml &&
+                wget https://raw.githubusercontent.com/InseeFrLab/codif-ape-annotation/main/taxonomy_NAF2025.xml &&
                 wget https://raw.githubusercontent.com/TheAIWizard/ETL-s3/main/template/correspondance_intitule_nature_activite.json &&
                 wget https://raw.githubusercontent.com/TheAIWizard/ETL-s3/main/template/correspondance_intitule_cj.json &&
                 wget https://raw.githubusercontent.com/TheAIWizard/ETL-s3/main/utils/validate_xml.py &&
