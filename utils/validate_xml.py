@@ -3,7 +3,7 @@ import requests
 import json
 
 
-with open("taxonomy.xml", 'r', encoding='utf-8') as file:
+with open("taxonomy_NAF2025.xml", 'r', encoding='utf-8') as file:
     xml_template = file.read()
 
 
