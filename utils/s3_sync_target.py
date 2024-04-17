@@ -42,6 +42,7 @@ def sync_api_s3(id_s3, prefix):
     print("id: " + id_s3)
     # Replace with the actual values for {id} and other parameters
     url_sync_s3 = service_endpoint + "/api/storages/export/s3/" + id_s3 + "/sync"
+    print(url_sync_s3)
     # Perform the POST request to sync S3 storage connection
     response_sync_s3 = requests.post(url_sync_s3, data=json.dumps(payload_sync_s3), headers=headers)
 
