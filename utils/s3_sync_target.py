@@ -25,7 +25,6 @@ def sync_api_s3(id_s3, prefix):
 
     # Sync s3 storage for annotation source
     payload_sync_s3 = {
-        "url_scheme": "s3",
         "title": f"Stockage sur S3 du {get_highest_integer_from_folders()}ème lot annoté",
         "description": "Synchronisation de la connexion de Label Studio au bucket S3 pour persister les données annotées",
         "can_delete_objects": True,
