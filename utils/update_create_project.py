@@ -127,7 +127,7 @@ def update_project():
         "enable_empty_annotation": False, # désactiver annotation vide
         "show_annotation_history": False,
         "organization": 1,
-        "color": "red",
+        "color": "green",
         "maximum_annotations": 1,
         "is_published": 1,
         # "model_version": "string",
