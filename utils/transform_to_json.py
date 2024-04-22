@@ -53,11 +53,14 @@ def format_data(data_df):
     with open('correspondance_intitule_cj.json', 'r') as file:
         correspondance_tableau_cj = json.load(file)
     # Convert Timestamp objects to strings
-    data_df['date_modification'] = data_df['date_modification'].astype(str)
+    # data_df['date_modification'] = data_df['date_modification'].astype(str)
+    data_df['date'] = data_df['date'].astype(str)
     # Map activ_nat_et with its heading
-    data_df['activ_nat_et_intitule'] = data_df['activ_nat_et'].map(correspondance_tableau_nature_activite)
+    # data_df['activ_nat_et_intitule'] = data_df['activ_nat_et'].map(correspondance_tableau_nature_activite)
+    data_df['nature'] = data_df['nature'].map(correspondance_tableau_nature_activite)
     # Map cj with its heading
-    data_df['cj_intitule'] = data_df['cj'].map(correspondance_tableau_cj)
+    # data_df['cj_intitule'] = data_df['cj'].map(correspondance_tableau_cj)
+    data_df['cj'] = data_df['cj'].map(correspondance_tableau_cj)
     # Replace NaN values with empty strings
     data_df = data_df.fillna("")
     return data_df
