@@ -47,7 +47,7 @@ previous_count = count_projects()
 with open("instructions.txt", 'r', encoding='utf-8') as file:
     instructions = file.read()
 
-with open("taxonomy_NAF2008_validation.xml", 'r', encoding='utf-8') as file:
+with open("taxonomy_NAF2025.xml", 'r', encoding='utf-8') as file:
     xml_template = file.read()
 
 
