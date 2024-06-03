@@ -14,5 +14,6 @@ data:
   S3_BUCKET_PREFIX_DEPOT_MANUEL: "label-studio/annotation-campaign-2024/NAF2008/data-samples/queue/"
   S3_BUCKET_PREFIX_ARCHIVE_DEPOT_MANUEL: "label-studio/annotation-campaign-2024/NAF2008/data-samples/archive/"
   S3_BUCKET_PREFIX_ANNOTATION_TARGET: "/label-studio/annotation-campaign-2024/NAF2008/data-annotated"
+  S3_BUCKET_PREFIX_ANNOTATION_NACE_REV: "/label-studio/annotation-campaign-2024/NAF2008/rev-NAF2025"
   LABEL_STUDIO_SERVICE_ENDPOINT: http://label-studio-naf-2025.user.lab.sspcloud.fr # replace with your service endpoint
   ID_S3_TARGET: "1"
