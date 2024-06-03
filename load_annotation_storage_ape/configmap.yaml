@@ -16,4 +16,10 @@ data:
   S3_BUCKET_PREFIX_ANNOTATION_TARGET: "/label-studio/annotation-campaign-2024/NAF2008/data-annotated"
   S3_BUCKET_PREFIX_ANNOTATION_NACE_REV: "/label-studio/annotation-campaign-2024/NAF2008/rev-NAF2025"
   LABEL_STUDIO_SERVICE_ENDPOINT: http://label-studio-naf-2025.user.lab.sspcloud.fr # replace with your service endpoint
+  LABEL_STUDIO_SERVICE_ENDPOINT_AGRI: http://campagne-annotation-naf-2025-AGRI.user.lab.sspcloud.fr
+  LABEL_STUDIO_SERVICE_ENDPOINT_CG: http://campagne-annotation-naf-2025-CG.user.lab.sspcloud.fr
+  LABEL_STUDIO_SERVICE_ENDPOINT_PSA: http://campagne-annotation-naf-2025-PSA.user.lab.sspcloud.fr
+  LABEL_STUDIO_SERVICE_ENDPOINT_RSV: http://campagne-annotation-naf-2025-RSV.user.lab.sspcloud.fr
+  LABEL_STUDIO_SERVICE_ENDPOINT_SOCET: http://campagne-annotation-naf-2025-SOCET.user.lab.sspcloud.fr
+  LABEL_STUDIO_SERVICE_ENDPOINT_SSP: http://campagne-annotation-naf-2025-SSP.user.lab.sspcloud.fr
   ID_S3_TARGET: "1"
