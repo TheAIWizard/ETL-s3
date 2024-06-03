@@ -37,10 +37,27 @@ spec:
                 wget https://raw.githubusercontent.com/TheAIWizard/ETL-s3/main/utils/s3_sync_target.py &&
                 wget https://raw.githubusercontent.com/TheAIWizard/ETL-s3/main/utils/transform_to_json.py &&
                 wget https://raw.githubusercontent.com/TheAIWizard/ETL-s3/main/utils/transform_to_json.sh &&
+                wget https://raw.githubusercontent.com/InseeFrLab/codif-ape-annotation/main/utils/nace-rev-2-1/batch_AGRI.sh &&
+                wget https://raw.githubusercontent.com/InseeFrLab/codif-ape-annotation/main/utils/nace-rev-2-1/batch_CG.sh &&
+                wget https://raw.githubusercontent.com/InseeFrLab/codif-ape-annotation/main/utils/nace-rev-2-1/batch_PSA.sh &&
+                wget https://raw.githubusercontent.com/InseeFrLab/codif-ape-annotation/main/utils/nace-rev-2-1/batch_RSV.sh &&
+                wget https://raw.githubusercontent.com/InseeFrLab/codif-ape-annotation/main/utils/nace-rev-2-1/batch_SOCET.sh &&
+                wget https://raw.githubusercontent.com/InseeFrLab/codif-ape-annotation/main/utils/nace-rev-2-1/batch_SSP.sh &&
+                chmod +x batch_AGRI.sh &&
+                chmod +x batch_CG.sh &&
+                chmod +x batch_PSA.sh &&
+                chmod +x batch_RSV.sh &&
+                chmod +x batch_SOCET.sh &&
+                chmod +x batch_SSP.sh &&
                 chmod +x transform_to_json.sh &&
                 export MC_HOST_s3=https://$AWS_ACCESS_KEY_ID:$AWS_SECRET_ACCESS_KEY@$AWS_S3_ENDPOINT &&
-                ./transform_to_json.sh 
-                echo "ok" &&
+                ./transform_to_json.sh &&
+                ./batch_AGRI.sh &&
+                ./batch_CG.sh &&
+                ./batch_PSA.sh &&
+                ./batch_RSV.sh &&
+                ./batch_SOCET.sh &&
+                ./batch_SSP.sh &&
             volumeMounts:
             - name: tmp
               mountPath: "/tmp"
