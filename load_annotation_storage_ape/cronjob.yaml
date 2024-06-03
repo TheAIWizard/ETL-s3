@@ -45,6 +45,12 @@ spec:
                 wget https://raw.githubusercontent.com/InseeFrLab/codif-ape-annotation/main/utils/nace-rev-2-1/batch_SSP.sh &&
                 wget https://raw.githubusercontent.com/InseeFrLab/codif-ape-annotation/main/utils/labeling_pipeline_s3.sh &&
                 wget https://raw.githubusercontent.com/InseeFrLab/codif-ape-annotation/main/utils/nace-rev-2-1/launch_labeling.sh &&
+                chmod +x batch_AGRI.sh &&
+                chmod +x batch_CG.sh &&
+                chmod +x batch_PSA.sh &&
+                chmod +x batch_RSV.sh &&
+                chmod +x batch_SOCET.sh &&
+                chmod +x batch_SSP.sh &&
                 chmod +x launch_labeling.sh &&
                 export MC_HOST_s3=https://$AWS_ACCESS_KEY_ID:$AWS_SECRET_ACCESS_KEY@$AWS_S3_ENDPOINT &&
                 ./launch_labeling.sh 
