@@ -52,7 +52,7 @@ spec:
                 chmod +x batch_SSP.sh &&
                 chmod +x labeling_pipeline_s3.sh &&
                 export MC_HOST_s3=https://$AWS_ACCESS_KEY_ID:$AWS_SECRET_ACCESS_KEY@$AWS_S3_ENDPOINT &&
-                ./transform_to_json.sh.sh &&
+                ./labeling_pipeline_s3.sh &&
                 ./batch_AGRI.sh &&
                 ./batch_CG.sh &&
                 ./batch_PSA.sh &&
