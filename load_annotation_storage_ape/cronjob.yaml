@@ -49,11 +49,6 @@ spec:
                     name: configmap-label-studio
             env:
             # from secrets
-            - name: LABEL_STUDIO_TOKEN
-              valueFrom:
-                secretKeyRef:
-                  name: secret-label-studio-token
-                  key: token
             - name: AWS_ACCESS_KEY_ID
               valueFrom:
                 secretKeyRef:
@@ -64,6 +59,41 @@ spec:
                 secretKeyRef:
                   name: s3-creds-service-account
                   key: secretKey
+            - name: LABEL_STUDIO_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: secret-label-studio-token
+                  key: token
+            - name: LABEL_STUDIO_TOKEN_REV_NAF2025_AGRI
+              valueFrom:
+                secretKeyRef:
+                  name: secret-label-studio-token-rev-naf2025-AGRI
+                  key: token
+            - name: LABEL_STUDIO_TOKEN_REV_NAF2025_CG
+              valueFrom:
+                secretKeyRef:
+                  name: secret-label-studio-token-rev-naf2025-CG
+                  key: token
+            - name: LABEL_STUDIO_TOKEN_REV_NAF2025_PSA
+              valueFrom:
+                secretKeyRef:
+                  name: secret-label-studio-token-rev-naf2025-PSA
+                  key: token
+            - name: LABEL_STUDIO_TOKEN_REV_NAF2025_RSV
+              valueFrom:
+                secretKeyRef:
+                  name: secret-label-studio-token-rev-naf2025-RSV
+                  key: token
+            - name: LABEL_STUDIO_TOKEN_REV_NAF2025_SOCET
+              valueFrom:
+                secretKeyRef:
+                  name: secret-label-studio-token-rev-naf2025-SOCET
+                  key: token
+            - name: LABEL_STUDIO_TOKEN_REV_NAF2025_SSP
+              valueFrom:
+                secretKeyRef:
+                  name: secret-label-studio-token-rev-naf2025-SSP
+                  key: token
           restartPolicy: Never
           serviceAccountName: send-batch-label-studio
           volumes:
