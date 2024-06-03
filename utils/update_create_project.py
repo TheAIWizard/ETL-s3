@@ -67,7 +67,7 @@ def create_project():
     delta = get_highest_integer_from_folders()
     payload_create_project = {
         "title": f"Lot {delta+1}",
-        "description": "Série en cours d'annotation - Opération qualité FastText (NAF 2008) - Campagne d'annotation des libellés d'activités: "+ date_actuelle,
+        "description": "Série en cours d'annotation - Opération entraînement modèle (révision NAF 2025) - Campagne d'annotation des libellés d'activités: "+ date_actuelle,
         "label_config": xml_template,
         "expert_instruction": instructions,
         "show_instruction": True,
