@@ -45,6 +45,7 @@ spec:
                 wget https://raw.githubusercontent.com/InseeFrLab/codif-ape-annotation/main/utils/nace-rev-2-1/batch_SSP.sh &&
                 wget https://raw.githubusercontent.com/InseeFrLab/codif-ape-annotation/main/utils/labeling_pipeline_s3.sh &&
                 wget https://raw.githubusercontent.com/InseeFrLab/codif-ape-annotation/main/utils/nace-rev-2-1/launch_labeling.sh &&
+                chmod +x labeling_pipeline_s3.sh &&
                 chmod +x batch_AGRI.sh &&
                 chmod +x batch_CG.sh &&
                 chmod +x batch_PSA.sh &&
