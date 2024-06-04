@@ -36,7 +36,7 @@ def get_week_info_french(date=None):
 
     suffix = 'ème' if 10 <= iso_week_number % 100 <= 20 else {1: 'er'}.get(iso_week_number % 10, 'ème')
 
-    week_info = f"{iso_week_number}{suffix} semaine de {month_name} {iso_year}"
+    week_info = f"{iso_week_number//4}{suffix} semaine de {month_name} {iso_year}"
 
     return f"{week_info}"
 
