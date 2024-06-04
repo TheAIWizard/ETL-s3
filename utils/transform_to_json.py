@@ -93,6 +93,7 @@ def main(bucket: str, path_source: str, input_file_path: str):
     # save converted json to bucket
     # save_to_s3(data, bucket, path_json, os.path.splitext(input_file_path)[0] + '.json')
     # split and save json to data source bucket for label studio annotation
+    print(path_source)
     split_and_save_to_s3(data, bucket, path_source, os.path.splitext(input_file_path)[0])
 
 
